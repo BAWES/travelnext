@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>    
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- if not logged in -->
+  <section *ngIf="!auth.isLoggedIn">
+    <button ion-button block (click)="loginWithGoogle()">
+      Login with Google 
+    </button>
+    <button ion-button block (click)="loginWithFacebook()">
+      Login with Facebook 
+    </button>
+  </section>
+
+  <!-- when already logged in -->
+  <ion-item *ngIf="auth.isLoggedIn">
+    <h1>You are now logged in</h1>
+    <h4>{{ auth.displayName }}</h4>
+    <h4>{{ auth.email }}</h4>
+  </ion-item>
+
+</ion-content>

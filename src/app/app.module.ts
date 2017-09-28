@@ -17,6 +17,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
 
 // services
 import { AuthService } from '../providers/auth.service';
@@ -45,6 +46,7 @@ export const firebaseConfig = {
     AboutPage,
     ContactPage,
     HomePage,
+    LoginPage,
     TabsPage
   ],
   imports: [
@@ -61,6 +63,7 @@ export const firebaseConfig = {
     AboutPage,
     ContactPage,
     HomePage,
+    LoginPage,
     TabsPage
   ],
   providers: [
