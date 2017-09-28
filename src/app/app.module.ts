@@ -3,13 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+// Ionic Storage 
+import { IonicStorageModule } from '@ionic/storage';
+
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+
+// Pages
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
+// services
+import { AuthService } from '../providers/auth.service';
+
+// native
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook } from '@ionic-native/facebook';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
 
 // AF2 Dev Env Settings 
 export const firebaseConfig = {
@@ -31,7 +49,11 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,9 +64,16 @@ export const firebaseConfig = {
     TabsPage
   ],
   providers: [
+    // Ionic Native
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    GooglePlus,
+    Facebook,
+    Camera,
+    File,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    // Custom
+    AuthService
   ]
 })
 export class AppModule {}
