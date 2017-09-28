@@ -4,10 +4,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-list>
-    <ion-item *ngFor="let country of countries | async">
-      {{ country.name.common }}
-    </ion-item>
+    <section *ngFor="let region of countrySrvc.countriesByRegion">
+      <ion-list-header>{{ region.name }}</ion-list-header>
+      <ion-item *ngFor="let country of region.countries">
+        {{ country.name.common }}
+      </ion-item>
+    </section>
   </ion-list>
 </ion-content>

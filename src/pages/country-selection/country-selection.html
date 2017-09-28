@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>{{ pageTitle }}</ion-title>
+
+    <ion-buttons right>
+      <button ion-button clear color="primary" 
+        [disabled]="!allowSave"
+        (click)="save()">
+        Save
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+      <!-- <section *ngFor="let country of allCountries">
+        <ion-item-divider>{{ country.name.common }}</ion-item-divider>
+        <ion-item *ngFor="let subcategory of category.subcategories">
+          <ion-checkbox [(ngModel)]="selectedSubcategories[subcategory.$key]" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+          <ion-label>{{ subcategory.subcategoryTitleEn }}</ion-label>
+        </ion-item>
+      </section> -->
+      
+    </ion-list>
+</ion-content>

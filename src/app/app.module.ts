@@ -21,6 +21,8 @@ import { LoginPage } from '../pages/login/login';
 
 // services
 import { AuthService } from '../providers/auth.service';
+import { UserService } from '../providers/user.service';
+import { CountryService } from '../providers/country.service';
 
 // native
 import { StatusBar } from '@ionic-native/status-bar';
@@ -76,7 +78,9 @@ export const firebaseConfig = {
     File,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     // Custom
-    AuthService
+    AuthService,
+    UserService,
+    CountryService
   ]
 })
 export class AppModule {}
