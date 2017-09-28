@@ -5,8 +5,9 @@
 </ion-header>
 
 <ion-content padding>
-  <p>Listing all countries</p>
   <ion-list>
-    <ion-item>Country Name</ion-item>
+    <ion-item *ngFor="let country of countries | async">
+      {{ country.name.common }}
+    </ion-item>
   </ion-list>
 </ion-content>
