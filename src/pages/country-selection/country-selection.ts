@@ -14,7 +14,6 @@ export class CountrySelectionPage {
 
   public pageTitle;
 
-  public allCountries = [];
   public selectedCountries = [];
 
   // Only allow save when data is fully loaded
@@ -31,22 +30,6 @@ export class CountrySelectionPage {
     
     this.pageTitle = `I've been to`;
 
-    // Get all "Parent" categories this vendor is assigned to
-    // this.db.list(`/vendors/${this.vendor.$key}/categories`).take(1).subscribe(vendorCategories => {
-    //   vendorCategories.forEach((vendorCategory, index) => {
-    //     this.allowedVendorCategoriesAndSubcategories[index] = {
-    //       categoryTitle: vendorCategory.categoryTitleEn,
-    //       subcategories: []
-    //     };
-    //     // Get list of ALL subcategories belonging to this category and append to array
-    //     this.db.list(`/categoriesWithVendors/${vendorCategory.$key}/subcategories`).take(1).subscribe(subcategories => {
-    //       subcategories.forEach(subcategory => {
-    //         this.allowedVendorCategoriesAndSubcategories[index].subcategories.push(subcategory);
-    //       });
-    //     });
-    //   });
-    // });
-
     // Mark categories that have already been assigned as checked.
     this._markAlreadyAssigned();
   }
@@ -56,33 +39,35 @@ export class CountrySelectionPage {
    */
   private _markAlreadyAssigned(){
     // Mark vendors selected subcategories as assigned
-    // Object.keys(this.vendor.subcategories).forEach(subcategoryKey => {
-    //   this.selectedSubcategories[subcategoryKey] = true;
+    // Object.keys(this.vendor.subcategories).forEach(countryKey => {
+    //   this.selectedCountries[countryKey] = true;
     // });
-    // this.allowSave = true;
+
+    this.allowSave = true;
   }
 
   /**
-   * Assign vendor to selected subcategories
+   * Rebuild user country selection db for overwrite
    */
   save(){
     let loading = this.loadingCtrl.create({
       content: 'Saving'
     });
 
-    // this.allowedVendorCategoriesAndSubcategories.forEach(category => {
-    //   if(category.subcategories){
-    //     category.subcategories.forEach(subcategory => {
-    //       if(this.selectedSubcategories[subcategory.$key] === false){
-    //         // Remove Vendor which has already been assigned and unticked before saving.
-    //         this._subcategoryService.removeVendor(this._basicVendorData, subcategory);
-    //       }else if(this.selectedSubcategories[subcategory.$key] === true){
-    //         // Add Vendor
-    //         this._subcategoryService.addVendor(this._basicVendorData, subcategory);
-    //       }
-    //     });
-    //   }
-    // });
+    console.log(this.selectedCountries);
+
+    // final object to upload
+    let newUserSelection = {};
+
+    this.countrySrvc.countriesByRegion.forEach(region => {
+      // data for this region to upload
+      let regionCountrySelection = {
+
+      };
+      region.forEach(country => {
+
+      });
+    });
 
     loading.dismiss();
     this.close();
