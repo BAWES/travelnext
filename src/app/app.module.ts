@@ -18,6 +18,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { CountrySelectionPage } from '../pages/country-selection/country-selection';
 
 // services
 import { AuthService } from '../providers/auth.service';
@@ -49,7 +50,8 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     LoginPage,
-    TabsPage
+    TabsPage,
+    CountrySelectionPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     LoginPage,
-    TabsPage
+    TabsPage,
+    CountrySelectionPage
   ],
   providers: [
     // Ionic Native

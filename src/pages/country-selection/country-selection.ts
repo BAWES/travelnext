@@ -4,7 +4,7 @@ import { NavController, NavParams, ViewController, LoadingController } from 'ion
 import { AngularFireDatabase } from 'angularfire2/database';
 
 // Services
-import { UserService } from '../../providers/user.service'
+import { CountryService } from '../../providers/country.service'
 
 @Component({
   selector: 'page-country-selection',
@@ -23,13 +23,13 @@ export class CountrySelectionPage {
   constructor(
     public navCtrl: NavController, 
     private _viewCtrl: ViewController,
-    private _countryService: UserService,
+    public countrySrvc: CountryService,
     public db: AngularFireDatabase,
     public loadingCtrl: LoadingController,
     params: NavParams
   ) {
     
-    this.pageTitle = `Countries I've been to`;
+    this.pageTitle = `I've been to`;
 
     // Get all "Parent" categories this vendor is assigned to
     // this.db.list(`/vendors/${this.vendor.$key}/categories`).take(1).subscribe(vendorCategories => {

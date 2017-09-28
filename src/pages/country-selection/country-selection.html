@@ -1,10 +1,5 @@
 <ion-header>
   <ion-navbar>
-    <ion-buttons left>
-      <button ion-button icon-only (click)="close()">
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
 
     <ion-title>{{ pageTitle }}</ion-title>
 
@@ -20,13 +15,12 @@
 
 <ion-content>
     <ion-list>
-      <!-- <section *ngFor="let country of allCountries">
-        <ion-item-divider>{{ country.name.common }}</ion-item-divider>
-        <ion-item *ngFor="let subcategory of category.subcategories">
-          <ion-checkbox [(ngModel)]="selectedSubcategories[subcategory.$key]" [ngModelOptions]="{standalone: true}"></ion-checkbox>
-          <ion-label>{{ subcategory.subcategoryTitleEn }}</ion-label>
+      <section *ngFor="let region of countrySrvc.countriesByRegion">
+        <ion-item-divider>{{ region.name }}</ion-item-divider>
+        <ion-item *ngFor="let country of region.countries">
+           <ion-checkbox [(ngModel)]="selectedCountries[country.$key]" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+          <ion-label>{{ country.name.common }}</ion-label>
         </ion-item>
-      </section> -->
-      
+      </section>      
     </ion-list>
 </ion-content>
