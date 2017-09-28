@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="net.bawes.travel" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TravelDiscuss</name>
     <description>Travel Discussion App</description>
     <author email="khalid@bawes" href="http://bawes.net/">BAWES</author>
@@ -98,6 +98,6 @@
     </plugin>
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.970489212684-p9s6okv7egh0f14drbr7okpo43d3k47p" />
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.875187117160-4t8nmsr545af9ejfid59q805p4t7up1s" />
     </plugin>
 </widget>

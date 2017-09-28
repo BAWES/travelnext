@@ -23,4 +23,8 @@ export class LoginPage {
     this.auth.loginWithFacebook();
   }
 
+  logout(){
+    this.auth.logout();
+  }
+
 }
