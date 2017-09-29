@@ -14,7 +14,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Pages
 import { AboutPage } from '../pages/about/about';
-import { AccountPage } from '../pages/account/account';
 import { HomePage } from '../pages/home/home';
 import { WorldPage } from '../pages/world/world';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -48,7 +47,6 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     AboutPage,
-    AccountPage,
     HomePage,
     WorldPage,
     LoginPage,
@@ -67,7 +65,6 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     AboutPage,
-    AccountPage,
     HomePage,
     WorldPage,
     LoginPage,
