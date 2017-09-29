@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>World</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <section *ngFor="let region of countrySrvc.countriesByRegion">
+      <ion-list-header>{{ region.name }}</ion-list-header>
+      <ion-item *ngFor="let country of region.countries">
+        {{ country.name.common }}
+      </ion-item>
+    </section>
+  </ion-list>
+</ion-content>
