@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Account
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <h4>{{ auth.displayName }}</h4>
+    <h4>{{ auth.email }}</h4>
+    <button ion-button block (click)="logout()">
+      Logout
+    </button>
+  </ion-item>
+</ion-content>

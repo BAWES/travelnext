@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Platform } from 'ionic-angular';
+import { Platform, Events } from 'ionic-angular';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
@@ -24,6 +24,7 @@ export class AuthService {
   
   constructor(
     private _platform: Platform,
+    private _events: Events,
     private _db: AngularFireDatabase,
     private _afAuth: AngularFireAuth,
     private _google: GooglePlus,
@@ -40,7 +41,8 @@ export class AuthService {
             if (!user) {
                 this.isLoggedIn = false;
                 this.displayName = null;   
-                this.email = null;     
+                this.email = null;
+                this._events.publish("user:logout");
                 return;
             }
             // User successfully logged in.
@@ -54,7 +56,10 @@ export class AuthService {
                 displayName: user.displayName,
                 profilePhoto: user.photoURL,
                 lastOnline: firebase.database.ServerValue.TIMESTAMP
-            }); 
+            });
+
+            // Publish Logged in event
+            this._events.publish("user:login");
         });
     }
 
@@ -100,10 +105,5 @@ export class AuthService {
      */
     logout(){
         this._afAuth.auth.signOut();
-
-        // Clear previous data
-        this.isLoggedIn = false;
-        this.displayName = null;
-        this.email = null;
     }
 }
