@@ -11,8 +11,11 @@
 
 <ion-content>
   <ion-list>
-    <section *ngFor="let region of countrySrvc.countriesByRegion">
-      <ion-list-header>{{ region.name }}</ion-list-header>
+    <section *ngFor="let region of userSrvc.selectedCountriesByRegion">
+      <ion-list-header>
+        {{ region.name }} 
+        <span item-right>{{ ((region.numCountriesSelected / region.totalCountriesInRegion) * 100) | number:'1.0-0'}}%</span>
+      </ion-list-header>
       <ion-item *ngFor="let country of region.countries">
         {{ country.name.common }}
       </ion-item>

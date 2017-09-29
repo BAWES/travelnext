@@ -21,6 +21,7 @@ export class CountryService {
      */
     initAllCountriesByRegion() {
         this._db.list("/regions").subscribe((regions) => {
+            this.countriesByRegion = [];
             regions.forEach(region => {
                 // Make countries iterable
                 if (region.countries) {

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { CountrySelectionPage } from '../country-selection/country-selection';
 
+import { UserService } from '../../providers/user.service';
 import { CountryService } from '../../providers/country.service';
 
 @Component({
@@ -12,8 +13,10 @@ import { CountryService } from '../../providers/country.service';
 export class HomePage {
 
   constructor(
-    public navCtrl: NavController, 
-    public countrySrvc: CountryService) {
+    public navCtrl: NavController,
+    public userSrvc: UserService,
+    public countrySrvc: CountryService
+  ) {
   }
 
   selectCountries(){
