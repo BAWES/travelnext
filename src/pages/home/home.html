@@ -20,7 +20,17 @@
       <ion-icon name="ios-log-out"></ion-icon>
     </button>
   </ion-item>
-  <ion-list>
+
+  <!-- If no countries selected yet -->
+  <section padding margin-top text-center *ngIf="countrySrvc.countriesByRegion.length && !userSrvc.selectedCountriesByRegion.length">
+    <h1>Keep track of the countries you've visited</h1>
+    <button ion-button (click)="selectCountries()">
+      Get Started
+    </button>
+  </section>
+
+
+  <ion-list *ngIf="userSrvc.selectedCountriesByRegion.length">
     <section *ngFor="let region of userSrvc.selectedCountriesByRegion">
       <ion-list-header>
         {{ region.name }} 
