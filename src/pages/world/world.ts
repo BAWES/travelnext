@@ -16,8 +16,4 @@ export class WorldPage {
     public countrySrvc: CountryService) {
   }
 
-  selectCountries(){
-    this.navCtrl.push(CountrySelectionPage);
-  }
-
 }
