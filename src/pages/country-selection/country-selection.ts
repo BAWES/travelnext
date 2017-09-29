@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 // Services
 import { CountryService } from '../../providers/country.service'
+import { UserService } from '../../providers/user.service'
 
 @Component({
   selector: 'page-country-selection',
@@ -22,6 +23,7 @@ export class CountrySelectionPage {
   constructor(
     public navCtrl: NavController, 
     private _viewCtrl: ViewController,
+    private _userService: UserService,
     public countrySrvc: CountryService,
     public db: AngularFireDatabase,
     public loadingCtrl: LoadingController,
@@ -54,20 +56,38 @@ export class CountrySelectionPage {
       content: 'Saving'
     });
 
-    console.log(this.selectedCountries);
-
     // final object to upload
-    let newUserSelection = {};
+    let newRegionDataForUser = {};
 
     this.countrySrvc.countriesByRegion.forEach(region => {
       // data for this region to upload
       let regionCountrySelection = {
-
+        name: region.name,
+        countries: {},
+        numCountriesSelected: 0,
+        totalCountriesInRegion: region.totalCountries
       };
-      region.forEach(country => {
 
-      });
+      // If region has countries, loop through and check
+      if(region.countries){
+        region.countries.forEach(country => {
+          // If country is selected, append to the selection
+          if(this.selectedCountries[country.$key] === true){
+            regionCountrySelection.countries[country.$key] = country;
+            regionCountrySelection.numCountriesSelected++;
+
+            // Delete key from object to avoid duplicates
+            delete regionCountrySelection.countries[country.$key]["$key"];
+          }
+        });
+      }
+
+      // Assign this regions new data
+      newRegionDataForUser[region.name] = regionCountrySelection;
     });
+
+    // Publish update to server
+    this._userService.updateCountrySelection(newRegionDataForUser);
 
     loading.dismiss();
     this.close();

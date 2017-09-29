@@ -5,8 +5,6 @@ import { Platform } from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
-import { UserService } from './user.service';
-
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -29,8 +27,7 @@ export class AuthService {
     private _db: AngularFireDatabase,
     private _afAuth: AngularFireAuth,
     private _google: GooglePlus,
-    private _fb: Facebook,
-    private _userService: UserService
+    private _fb: Facebook
     ) { 
         this.listenForAuthStatusChange();
     }
