@@ -2,11 +2,13 @@
   <ion-navbar>
     <ion-title>World</ion-title>
   </ion-navbar>
+  <ion-searchbar (ionInput)="search($event)" placeholder="Search for a country">
+  </ion-searchbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <section *ngFor="let region of countrySrvc.countriesByRegion">
+    <section *ngFor="let region of countriesByRegion">
       <ion-list-header>{{ region.name }}</ion-list-header>
       <ion-item *ngFor="let country of region.countries">
         {{ country.name.common }}
