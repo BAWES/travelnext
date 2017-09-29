@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ActionSheetController } from 'ionic-angular';
 
 import { CountrySelectionPage } from '../country-selection/country-selection';
 
+import { AuthService } from '../../providers/auth.service';
 import { UserService } from '../../providers/user.service';
 import { CountryService } from '../../providers/country.service';
 
@@ -14,13 +15,34 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    public auth: AuthService,
     public userSrvc: UserService,
-    public countrySrvc: CountryService
+    public countrySrvc: CountryService,
+    public actionSheetCtrl: ActionSheetController
   ) {
   }
 
   selectCountries(){
     this.navCtrl.push(CountrySelectionPage);
+  }
+
+  attemptLogout(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Logout',
+          role: 'destructive',
+          handler: () => {
+            this.auth.logout();
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }

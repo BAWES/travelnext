@@ -19,6 +19,7 @@ export class AuthService {
   // Logged in agent details
   public isLoggedIn: boolean = false;
   public displayName: string;
+  public photo: string;
   public email: string;
   public uid: string;
   
@@ -42,6 +43,8 @@ export class AuthService {
                 this.isLoggedIn = false;
                 this.displayName = null;   
                 this.email = null;
+                this.uid = null;
+                this.photo = null;
                 this._events.publish("user:logout");
                 return;
             }
@@ -50,6 +53,7 @@ export class AuthService {
             this.displayName = user.displayName;      
             this.email = user.email;
             this.uid = user.uid;
+            this.photo = user.photoURL;
 
             // Update user latest data
             this._db.object(`/users/${user.uid}`).update({

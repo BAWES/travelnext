@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Events } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -12,11 +13,17 @@ export class UserService {
 
   public selectedCountriesByRegion = [];
 
+  public liveUserSubscription;
+
   constructor(
     private _db: AngularFireDatabase,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _events: Events
     ) { 
       this.initAllSelectedCountriesByRegion();
+      this._events.subscribe('user:logout', (userEventData) => {
+        this.liveUserSubscription.unsubscribe();
+      });
     }
 
     updateCountrySelection(selectionData){
@@ -27,7 +34,7 @@ export class UserService {
      * Keep country list by region updated.
      */
     initAllSelectedCountriesByRegion() {
-        this._db.list(`/users/${this._auth.uid}/country-selection`).subscribe((regions) => {
+        this.liveUserSubscription = this._db.list(`/users/${this._auth.uid}/country-selection`).subscribe((regions) => {
             this.selectedCountriesByRegion = [];
             regions.forEach(region => {
                 // Make countries iterable

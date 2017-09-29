@@ -10,6 +10,16 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-avatar item-start *ngIf="auth.photo">
+      <img [src]="auth.photo">
+    </ion-avatar>
+    <h2>{{ auth.displayName }}</h2>
+    <p>World Progress: 5%</p>
+    <button ion-button icon-only item-end clear color="dark" (click)="attemptLogout()">
+      <ion-icon name="ios-log-out"></ion-icon>
+    </button>
+  </ion-item>
   <ion-list>
     <section *ngFor="let region of userSrvc.selectedCountriesByRegion">
       <ion-list-header>
