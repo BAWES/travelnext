@@ -17,15 +17,16 @@ export class WorldPage {
     public navCtrl: NavController, 
     public countrySrvc: CountryService
   ) {
-      this.countriesByRegion = this.countrySrvc.countriesByRegion;
+      this.countriesByRegion = this.countrySrvc.countriesByRegion.slice(0);
   }
 
   /**
-   * Search for vendor that matches user input
+   * Search for country that matches user input
    * @param  
    */
   search($event){
     let userInput = $event.target.value;
+
     if(!userInput){
       this.countriesByRegion = this.countrySrvc.countriesByRegion;
       return;
@@ -41,8 +42,10 @@ export class WorldPage {
       });
       // If there are results from filtered countries, push them to the list
       if(filteredCountries.length){
-        region.countries = filteredCountries;
-        this.countriesByRegion.push(region);
+        let newCountryData = JSON.parse(JSON.stringify(filteredCountries));
+        let newRegionData = JSON.parse(JSON.stringify(region));
+        newRegionData.countries = filteredCountries;
+        this.countriesByRegion.push(newRegionData);
       }
     });
   }

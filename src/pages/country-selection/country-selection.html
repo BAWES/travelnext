@@ -11,11 +11,13 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-searchbar (ionInput)="search($event)" placeholder="Search for a country">
+  </ion-searchbar>
 </ion-header>
 
 <ion-content>
     <ion-list>
-      <section *ngFor="let region of countrySrvc.countriesByRegion">
+      <section *ngFor="let region of countriesByRegion">
         <ion-item-divider>{{ region.name }}</ion-item-divider>
         <ion-item *ngFor="let country of region.countries">
            <ion-checkbox [(ngModel)]="selectedCountries[country.$key]" [ngModelOptions]="{standalone: true}"></ion-checkbox>

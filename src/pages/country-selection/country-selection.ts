@@ -15,6 +15,7 @@ export class CountrySelectionPage {
 
   public pageTitle;
 
+  public countriesByRegion;
   public selectedCountries = [];
 
   // Only allow save when data is fully loaded
@@ -29,8 +30,9 @@ export class CountrySelectionPage {
     public loadingCtrl: LoadingController,
     params: NavParams
   ) {
-    
     this.pageTitle = `I've been to`;
+
+    this.countriesByRegion = this.countrySrvc.countriesByRegion;
 
     // Mark categories that have already been assigned as checked.
     this._markAlreadyAssigned();
@@ -98,6 +100,36 @@ export class CountrySelectionPage {
    */
   close(){
     this._viewCtrl.dismiss();
+  }
+
+  /**
+   * Search for country that matches user input
+   * @param  
+   */
+  search($event){
+    let userInput = $event.target.value;
+
+    if(!userInput){
+      this.countriesByRegion = this.countrySrvc.countriesByRegion;
+      return;
+    }
+
+    this.countriesByRegion = [];
+    this.countrySrvc.countriesByRegion.forEach(region => {
+      let filteredCountries = region.countries.filter(country => {
+        if((country.name.common.toLowerCase().indexOf(userInput.toLowerCase()) !== -1)){
+          return true;
+        }
+        return false;
+      });
+      // If there are results from filtered countries, push them to the list
+      if(filteredCountries.length){
+        let newCountryData = JSON.parse(JSON.stringify(filteredCountries));
+        let newRegionData = JSON.parse(JSON.stringify(region));
+        newRegionData.countries = filteredCountries;
+        this.countriesByRegion.push(newRegionData);
+      }
+    });
   }
 
 }
