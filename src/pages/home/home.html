@@ -19,6 +19,10 @@
       (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
       Select countries
     </button>
+    <button ion-button outline color="light"
+      (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
+      Share
+    </button>
   </section>
   
 
@@ -35,7 +39,7 @@
     <section *ngFor="let region of userSrvc.selectedCountriesByRegion" [class]='region.name'>
       <ion-list-header>
         {{ region.name }} 
-        <span item-right>{{ ((region.numCountriesSelected / region.totalCountriesInRegion) * 100) | number:'1.0-0'}}%</span>
+        <ion-badge item-right>{{ ((region.numCountriesSelected / region.totalCountriesInRegion) * 100) | number:'1.0-0'}}%</ion-badge>
       </ion-list-header>
       <ion-item *ngFor="let country of region.countries">
         {{ country.name.common }}

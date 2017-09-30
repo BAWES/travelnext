@@ -23,27 +23,49 @@ page-home {
 
     .regions{
         ion-list-header{
-            color: white;
-            background: black no-repeat;
+            color: black;
+            font-weight: bold;
+            background: white no-repeat;
             background-size: cover;
+            font-size: 1.4em;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            ion-badge{
+                // font-size:0.9em;
+                border: 1px solid black;
+                background: black;
+            }
         }
         .Africa{
-            background-image: url('../assets/world.jpg');
+            ion-list-header{
+                background-image: url('../assets/africa.jpg');
+            }
         }
         .Americas{
-            background-image: url('../assets/world.jpg');
+            ion-list-header{
+                background-image: url('../assets/americas.jpg');
+            }
         }
         .Antartica{
-            background-image: url('../assets/world.jpg');
+            ion-list-header{
+                background-image: url('../assets/antartica.jpg');
+            }
         }
         .Asia{
-            background-image: url('../assets/world.jpg');
+            ion-list-header{
+                background-image: url('../assets/asia.jpg');
+            }
         }
         .Europe{
-            background-image: url('../assets/world.jpg');
+            ion-list-header{
+                background-image: url('../assets/europe.jpg');
+            }
         }
         .Oceania{
-            background-image: url('../assets/world.jpg');
+            ion-list-header{
+                background-image: url('../assets/oceania.jpg');
+            }
         }
     }
 }
