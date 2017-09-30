@@ -1,25 +1,26 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>TravelDiscuss</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
 <ion-content>
   <ion-item>
     <ion-avatar item-start *ngIf="auth.photo">
       <img [src]="auth.photo">
     </ion-avatar>
     <h2>{{ auth.displayName }}</h2>
-    <p>World Progress: {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%</p>
     <button ion-button icon-only item-end clear color="dark" (click)="attemptLogout()">
       <ion-icon name="ios-log-out"></ion-icon>
     </button>
   </ion-item>
+
+  <section class='worldProgress'>
+    <h1 class='top'>You've been to</h1>
+    <h1 class='middle' *ngIf="userSrvc.numCountriesVisited">
+      {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
+    </h1>
+    <h1 class='bottom'>of the world</h1>
+    <button ion-button outline color="light"
+      (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
+      Select countries
+    </button>
+  </section>
+  
 
   <!-- If no countries selected yet -->
   <section padding margin-top text-center *ngIf="countrySrvc.countriesByRegion.length && !userSrvc.selectedCountriesByRegion.length">
