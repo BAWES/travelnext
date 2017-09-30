@@ -15,11 +15,11 @@
       {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
     </h1>
     <h1 class='bottom'>of the world</h1>
-    <button ion-button outline color="light"
+    <button ion-button outline color="dark"
       (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
       Select countries
     </button>
-    <button ion-button outline color="light"
+    <button ion-button outline color="dark"
       (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
       Share
     </button>
