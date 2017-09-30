@@ -20,4 +20,30 @@ page-home {
             margin-top: -0.8em;
         }
     }
+
+    .regions{
+        ion-list-header{
+            color: white;
+            background: black no-repeat;
+            background-size: cover;
+        }
+        .Africa{
+            background-image: url('../assets/world.jpg');
+        }
+        .Americas{
+            background-image: url('../assets/world.jpg');
+        }
+        .Antartica{
+            background-image: url('../assets/world.jpg');
+        }
+        .Asia{
+            background-image: url('../assets/world.jpg');
+        }
+        .Europe{
+            background-image: url('../assets/world.jpg');
+        }
+        .Oceania{
+            background-image: url('../assets/world.jpg');
+        }
+    }
 }

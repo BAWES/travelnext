@@ -31,8 +31,8 @@
   </section>
 
 
-  <ion-list *ngIf="userSrvc.selectedCountriesByRegion.length">
-    <section *ngFor="let region of userSrvc.selectedCountriesByRegion">
+  <ion-list *ngIf="userSrvc.selectedCountriesByRegion.length" class='regions'>
+    <section *ngFor="let region of userSrvc.selectedCountriesByRegion" [class]='region.name'>
       <ion-list-header>
         {{ region.name }} 
         <span item-right>{{ ((region.numCountriesSelected / region.totalCountriesInRegion) * 100) | number:'1.0-0'}}%</span>
