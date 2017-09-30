@@ -26,8 +26,13 @@ export class UserService {
       });
     }
 
-    updateCountrySelection(selectionData){
-      this._db.object(`/users/${this._auth.uid}/country-selection`).set(selectionData);
+    updateCountrySelection(selectionData): Promise<any>{
+        return new Promise((resolve, reject) => {
+            this._db.object(`/users/${this._auth.uid}/country-selection`)
+                .set(selectionData)
+                .then(() => resolve())
+                .catch(err => reject(err));
+        });
     }
 
     /**

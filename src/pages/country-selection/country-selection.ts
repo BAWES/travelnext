@@ -32,11 +32,11 @@ export class CountrySelectionPage {
     params: NavParams
   ) {
     this.pageTitle = `I've been to`;
-
-    this.countriesByRegion = this.countrySrvc.countriesByRegion;
   }
 
   ionViewWillEnter(){
+    this.countriesByRegion = this.countrySrvc.countriesByRegion;
+
     // Mark categories that have already been assigned as checked.
     this._markAlreadyAssigned();
   }
@@ -55,6 +55,9 @@ export class CountrySelectionPage {
     });
     this.allowSave = true;
     this._ref.tick();
+
+    console.log(this.selectedCountries);
+    console.log(this.countriesByRegion);
   }
 
   /**
@@ -96,10 +99,10 @@ export class CountrySelectionPage {
     });
 
     // Publish update to server
-    this._userService.updateCountrySelection(newRegionDataForUser);
-
-    loading.dismiss();
-    this.close();
+    this._userService.updateCountrySelection(newRegionDataForUser).then(() => {
+      loading.dismiss();
+      this.close();
+    });
   }
 
   /**
