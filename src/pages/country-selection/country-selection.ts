@@ -40,6 +40,7 @@ export class CountrySelectionPage {
     let loading = this.loadingCtrl.create({
       content: 'Saving'
     });
+    loading.present();
 
     // final object to upload
     let newRegionDataForUser = {};
