@@ -1,4 +1,4 @@
-import { Component, ApplicationRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -16,48 +16,21 @@ export class CountrySelectionPage {
   public pageTitle;
 
   public countriesByRegion;
-  public selectedCountries = [];
 
   // Only allow save when data is fully loaded
-  public allowSave = false;
+  public allowSave = true;
 
   constructor(
     public navCtrl: NavController, 
     private _viewCtrl: ViewController,
-    private _userService: UserService,
+    public userSrvc: UserService,
     public countrySrvc: CountryService,
     public db: AngularFireDatabase,
     public loadingCtrl: LoadingController,
-    private _ref: ApplicationRef,
     params: NavParams
   ) {
     this.pageTitle = `I've been to`;
-  }
-
-  ionViewWillEnter(){
     this.countriesByRegion = this.countrySrvc.countriesByRegion;
-
-    // Mark categories that have already been assigned as checked.
-    this._markAlreadyAssigned();
-  }
-
-  /**
-   * Mark vendor's already selected subcategories as already assigned.
-   */
-  private _markAlreadyAssigned(){
-    this.selectedCountries = [];
-    this._userService.selectedCountriesByRegion.forEach(region => {
-      if(region.countries){
-        region.countries.forEach(country => {
-          this.selectedCountries[country.$key] = true;
-        });
-      }
-    });
-    this.allowSave = true;
-    this._ref.tick();
-
-    console.log(this.selectedCountries);
-    console.log(this.countriesByRegion);
   }
 
   /**
@@ -84,7 +57,7 @@ export class CountrySelectionPage {
       if(region.countries){
         region.countries.forEach(country => {
           // If country is selected, append to the selection
-          if(this.selectedCountries[country.$key] === true){
+          if(this.userSrvc.selectedCountriesFormModel[country.$key] === true){
             regionCountrySelection.countries[country.$key] = JSON.parse(JSON.stringify(country));
             regionCountrySelection.numCountriesSelected++;
 
@@ -99,7 +72,7 @@ export class CountrySelectionPage {
     });
 
     // Publish update to server
-    this._userService.updateCountrySelection(newRegionDataForUser).then(() => {
+    this.userSrvc.updateCountrySelection(newRegionDataForUser).then(() => {
       loading.dismiss();
       this.close();
     });

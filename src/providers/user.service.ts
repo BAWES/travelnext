@@ -11,22 +11,26 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class UserService {
 
-  public selectedCountriesByRegion = [];
+    // Selected countries for display on home page
+    public selectedCountriesByRegion = [];
+    // Selected countries data for use on update of user selection
+    public selectedCountriesFormModel = [];
 
-  public liveUserSubscription;
+    // Subscription to unsubscribe on logout
+    public liveUserSubscription;
 
-  constructor(
-    private _db: AngularFireDatabase,
-    private _auth: AuthService,
-    private _events: Events
-    ) { 
-      this.initAllSelectedCountriesByRegion();
-      this._events.subscribe('user:logout', (userEventData) => {
-        this.liveUserSubscription.unsubscribe();
-      });
+    constructor(
+        private _db: AngularFireDatabase,
+        private _auth: AuthService,
+        private _events: Events
+    ) {
+        this.initAllSelectedCountriesByRegion();
+        this._events.subscribe('user:logout', (userEventData) => {
+            this.liveUserSubscription.unsubscribe();
+        });
     }
 
-    updateCountrySelection(selectionData): Promise<any>{
+    updateCountrySelection(selectionData): Promise<any> {
         return new Promise((resolve, reject) => {
             this._db.object(`/users/${this._auth.uid}/country-selection`)
                 .set(selectionData)
@@ -49,6 +53,9 @@ export class UserService {
                         let country = region.countries[countryKey];
                         country.$key = countryKey;
                         countryList.push(country);
+
+                        // Append to form data model for user input.
+                        this.selectedCountriesFormModel[country.$key] = true;
                     });
                     region.countries = countryList;
                 }

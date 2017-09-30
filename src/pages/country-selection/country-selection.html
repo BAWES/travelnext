@@ -20,7 +20,7 @@
       <section *ngFor="let region of countriesByRegion">
         <ion-item-divider>{{ region.name }}</ion-item-divider>
         <ion-item *ngFor="let country of region.countries">
-           <ion-checkbox [(ngModel)]="selectedCountries[country.$key]" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+           <ion-checkbox [(ngModel)]="userSrvc.selectedCountriesFormModel[country.$key]" [ngModelOptions]="{standalone: true}"></ion-checkbox>
           <ion-label>{{ country.name.common }}</ion-label>
         </ion-item>
       </section>      
