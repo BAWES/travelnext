@@ -15,7 +15,7 @@
       <img [src]="auth.photo">
     </ion-avatar>
     <h2>{{ auth.displayName }}</h2>
-    <p>World Progress: 5%</p>
+    <p>World Progress: {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%</p>
     <button ion-button icon-only item-end clear color="dark" (click)="attemptLogout()">
       <ion-icon name="ios-log-out"></ion-icon>
     </button>

@@ -10,6 +10,8 @@ import { AuthService } from './auth.service';
 */
 @Injectable()
 export class UserService {
+    public numCountriesVisited = 0;
+    public numCountriesTotal = 0;
 
     // Selected countries for display on home page
     public selectedCountriesByRegion = [];
@@ -60,6 +62,13 @@ export class UserService {
                     region.countries = countryList;
                 }
                 this.selectedCountriesByRegion.push(region);
+
+                // Append to num countries
+                if(region.numCountriesSelected && region.totalCountriesInRegion){
+                    this.numCountriesTotal += region.totalCountriesInRegion;
+                    this.numCountriesVisited += region.numCountriesSelected;
+                }
+                
             });
         });
     }
