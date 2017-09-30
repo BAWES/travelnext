@@ -1,29 +1,31 @@
 <ion-content>
-  <ion-item>
-    <ion-avatar item-start *ngIf="auth.photo">
-      <img [src]="auth.photo">
-    </ion-avatar>
-    <h2>{{ auth.displayName }}</h2>
-    <button ion-button icon-only item-end clear color="dark" (click)="attemptLogout()">
-      <ion-icon name="ios-log-out"></ion-icon>
-    </button>
-  </ion-item>
+  <div class='headerArea'>
+    <ion-item>
+      <ion-avatar item-start *ngIf="auth.photo">
+        <img [src]="auth.photo">
+      </ion-avatar>
+      <h2>{{ auth.displayName }}</h2>
+      <button ion-button icon-only item-end clear color="dark" (click)="attemptLogout()">
+        <ion-icon name="ios-log-out"></ion-icon>
+      </button>
+    </ion-item>
 
-  <section class='worldProgress'>
-    <h1 class='top'>You've been to</h1>
-    <h1 class='middle' *ngIf="userSrvc.numCountriesVisited">
-      {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
-    </h1>
-    <h1 class='bottom'>of the world</h1>
-    <button ion-button outline color="dark"
-      (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
-      Select countries
-    </button>
-    <button ion-button outline color="dark"
-      (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
-      Share
-    </button>
-  </section>
+    <section class='worldProgress'>
+      <h1 class='top'>You've covered</h1>
+      <h1 class='middle' *ngIf="userSrvc.numCountriesVisited">
+        {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
+      </h1>
+      <h1 class='bottom'>of the world</h1>
+      <button ion-button outline color="dark"
+        (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
+        Select countries
+      </button>
+      <button ion-button outline color="dark"
+        (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
+        Share
+      </button>
+    </section>
+  </div>
   
 
   <!-- If no countries selected yet -->
