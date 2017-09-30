@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ApplicationRef } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -28,12 +28,15 @@ export class CountrySelectionPage {
     public countrySrvc: CountryService,
     public db: AngularFireDatabase,
     public loadingCtrl: LoadingController,
+    private _ref: ApplicationRef,
     params: NavParams
   ) {
     this.pageTitle = `I've been to`;
 
     this.countriesByRegion = this.countrySrvc.countriesByRegion;
+  }
 
+  ionViewWillEnter(){
     // Mark categories that have already been assigned as checked.
     this._markAlreadyAssigned();
   }
@@ -42,12 +45,16 @@ export class CountrySelectionPage {
    * Mark vendor's already selected subcategories as already assigned.
    */
   private _markAlreadyAssigned(){
-    // Mark vendors selected subcategories as assigned
-    // Object.keys(this.vendor.subcategories).forEach(countryKey => {
-    //   this.selectedCountries[countryKey] = true;
-    // });
-
+    this.selectedCountries = [];
+    this._userService.selectedCountriesByRegion.forEach(region => {
+      if(region.countries){
+        region.countries.forEach(country => {
+          this.selectedCountries[country.$key] = true;
+        });
+      }
+    });
     this.allowSave = true;
+    this._ref.tick();
   }
 
   /**
@@ -75,7 +82,7 @@ export class CountrySelectionPage {
         region.countries.forEach(country => {
           // If country is selected, append to the selection
           if(this.selectedCountries[country.$key] === true){
-            regionCountrySelection.countries[country.$key] = country;
+            regionCountrySelection.countries[country.$key] = JSON.parse(JSON.stringify(country));
             regionCountrySelection.numCountriesSelected++;
 
             // Delete key from object to avoid duplicates
