@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { CountryPage } from '../country/country';
 import { CountrySelectionPage } from '../country-selection/country-selection';
 
 import { CountryService } from '../../providers/country.service';
 
 @Component({
-  selector: 'page-world',
-  templateUrl: 'world.html'
+  selector: 'page-country',
+  templateUrl: 'country.html'
 })
-export class WorldPage {
+export class CountryPage {
 
   public countriesByRegion;
 
@@ -19,12 +18,6 @@ export class WorldPage {
     public countrySrvc: CountryService
   ) {
       this.countriesByRegion = this.countrySrvc.countriesByRegion.slice(0);
-  }
-
-  loadCountry(country){
-    this.navCtrl.push(CountryPage, {
-      country: country
-    });
   }
 
   /**

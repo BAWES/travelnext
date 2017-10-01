@@ -34,18 +34,18 @@
       </button>
     </section>
   </div>
-  
 
-
+  <!-- Region/Country List -->
   <ion-list *ngIf="userSrvc.selectedCountriesByRegion.length" class='regions'>
     <section *ngFor="let region of userSrvc.selectedCountriesByRegion" [class]='region.name'>
       <ion-list-header>
         {{ region.name }} 
         <ion-badge item-right>{{ ((region.numCountriesSelected / region.totalCountriesInRegion) * 100) | number:'1.0-0'}}%</ion-badge>
       </ion-list-header>
-      <ion-item *ngFor="let country of region.countries">
+      <button ion-item *ngFor="let country of region.countries"
+        (click)="loadCountry(country)">
         {{ country.name.common }}
-      </ion-item>
+      </button>
     </section>
   </ion-list>
 </ion-content>

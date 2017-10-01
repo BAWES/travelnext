@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController } from 'ionic-angular';
 
+import { CountryPage } from '../country/country';
 import { CountrySelectionPage } from '../country-selection/country-selection';
 
 import { AuthService } from '../../providers/auth.service';
@@ -24,6 +25,12 @@ export class HomePage {
 
   selectCountries(){
     this.navCtrl.push(CountrySelectionPage);
+  }
+
+  loadCountry(country){
+    this.navCtrl.push(CountryPage, {
+      country: country
+    });
   }
 
   attemptLogout(){
