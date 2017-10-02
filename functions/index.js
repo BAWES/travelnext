@@ -23,8 +23,6 @@ exports.calculateUserProgress = functions.database.ref('/user-country-selection/
 
         console.log("total countries", totalCountriesVisited);
 
-        const userRef = event.data.adminRef.root.child(`/users/${userId}`);
-
         // You must return a Promise when performing asynchronous tasks
-        return userRef.child("totalCountriesVisited").set(totalCountriesVisited);
+        return event.data.adminRef.root.child(`/users/${userId}/totalCountriesVisited`).set(totalCountriesVisited);
     });
