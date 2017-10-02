@@ -23,8 +23,8 @@ exports.calculateUserProgress = functions.database.ref('/user-country-selection/
 
         console.log("total countries", totalCountriesVisited);
 
-        // const userRef = functions.database.ref(`users/${userId}`);
+        const userRef = functions.database.ref(`/users/${userId}`);
 
-        // // You must return a Promise when performing asynchronous tasks
-        // return userRef.child("totalCountriesVisited").set(totalCountriesVisited);
+        // You must return a Promise when performing asynchronous tasks
+        return userRef.child("totalCountriesVisited").set(totalCountriesVisited);
     });
