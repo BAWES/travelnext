@@ -8,21 +8,23 @@ const admin = require('firebase-admin');
  * Calculate user progress based on countries he selected.
  */
 exports.calculateUserProgress = functions.database.ref('/user-country-selection/{user_id}')
-    .onWrite(event => {
+    .onWrite(event => {        
         // Grab the current value of what was written to the Realtime Database.
         const userId = event.params.user_id;
         const originalUserSelection = event.data.val();
 
         let totalCountriesVisited = 0;
 
-        originalUserSelection.forEach(region => {
+        Object.keys(originalUserSelection).forEach(regionKey => {
             if (region.countries) {
-                totalCountriesVisited += region.countries.length;
+                totalCountriesVisited += Object.keys(region[regionKey].countries).length;
             }
         });
 
-        const userRef = functions.database.ref(`users/${userId}`);
+        console.log("total countries", totalCountriesVisited);
 
-        // You must return a Promise when performing asynchronous tasks
-        return userRef.child("totalCountriesVisited").set(totalCountriesVisited);
+        // const userRef = functions.database.ref(`users/${userId}`);
+
+        // // You must return a Promise when performing asynchronous tasks
+        // return userRef.child("totalCountriesVisited").set(totalCountriesVisited);
     });
