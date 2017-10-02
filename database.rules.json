@@ -1,0 +1,57 @@
+{
+  "rules": {
+    
+    "users": {
+      "$user_id": {
+        // grants read/write access to the owner of this user account
+        // whose uid must exactly match the key ($user_id)
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid",
+
+        // Set the Allowed Fields to be written
+        "displayName": {
+          ".validate": true
+        },
+        "lastOnline": {
+          ".validate": true
+        },
+        "profilePhoto": {
+          ".validate": true
+        },
+
+        // Any other fields not allowed
+        "$any": {
+          ".validate": false
+        }
+      }
+    },
+      
+    // Storage of country selection
+    "user-country-selection": {
+      "$user_id": {
+        // grants read/write access to the owner of this user account
+        // whose uid must exactly match the key ($user_id)
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid",
+          
+        "$region": {
+          "name": {
+            ".validate": true
+          },
+          "numCountriesSelected": {
+            ".validate": "newData.isNumber()"
+          },
+          "totalCountriesInRegion": {
+            ".validate": "newData.isNumber()"
+          }
+        }
+      }
+    },
+
+    "regions": {
+      ".read": true,
+      ".write": false
+    }
+    
+  }
+}
