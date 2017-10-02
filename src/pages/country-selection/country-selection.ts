@@ -108,7 +108,6 @@ export class CountrySelectionPage {
       });
       // If there are results from filtered countries, push them to the list
       if(filteredCountries.length){
-        let newCountryData = JSON.parse(JSON.stringify(filteredCountries));
         let newRegionData = JSON.parse(JSON.stringify(region));
         newRegionData.countries = filteredCountries;
         this.countriesByRegion.push(newRegionData);

@@ -34,7 +34,7 @@ export class UserService {
 
     updateCountrySelection(selectionData): Promise<any> {
         return new Promise((resolve, reject) => {
-            this._db.object(`/users/${this._auth.uid}/country-selection`)
+            this._db.object(`/user-country-selection/${this._auth.uid}`)
                 .set(selectionData)
                 .then(() => resolve())
                 .catch(err => reject(err));
@@ -45,7 +45,7 @@ export class UserService {
      * Keep country list by region updated.
      */
     initAllSelectedCountriesByRegion() {
-        this.liveUserSubscription = this._db.list(`/users/${this._auth.uid}/country-selection`).subscribe((regions) => {
+        this.liveUserSubscription = this._db.list(`/user-country-selection/${this._auth.uid}`).subscribe((regions) => {
             this.selectedCountriesByRegion = [];
             regions.forEach(region => {
                 // Make countries iterable
