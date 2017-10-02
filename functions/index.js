@@ -1,8 +1,28 @@
+// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-exports.helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
-});
+// The Firebase Admin SDK to access the Firebase Realtime Database. 
+const admin = require('firebase-admin');
+
+/**
+ * Calculate user progress based on countries he selected.
+ */
+exports.calculateUserProgress = functions.database.ref('/user-country-selection/{user_id}')
+    .onWrite(event => {
+        // Grab the current value of what was written to the Realtime Database.
+        const userId = event.params.user_id;
+        const originalUserSelection = event.data.val();
+
+        let totalCountriesVisited = 0;
+
+        originalUserSelection.forEach(region => {
+            if (region.countries) {
+                totalCountriesVisited += region.countries.length;
+            }
+        });
+
+        const userRef = functions.database.ref(`users/${userId}`);
+
+        // You must return a Promise when performing asynchronous tasks
+        return userRef.child("totalCountriesVisited").set(totalCountriesVisited);
+    });
