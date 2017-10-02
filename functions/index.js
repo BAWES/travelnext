@@ -16,7 +16,7 @@ exports.calculateUserProgress = functions.database.ref('/user-country-selection/
         let totalCountriesVisited = 0;
 
         Object.keys(originalUserSelection).forEach(regionKey => {
-            if (region.countries) {
+            if (region[regionKey].countries) {
                 totalCountriesVisited += Object.keys(region[regionKey].countries).length;
             }
         });
