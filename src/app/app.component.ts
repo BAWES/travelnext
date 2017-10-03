@@ -9,7 +9,6 @@ import { LoginPage } from '../pages/login/login';
 // About will become splash page
 import { AboutPage } from '../pages/about/about';
 
-import { AuthService } from '../providers/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,8 +23,7 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     private _zone: NgZone,
-    private _events: Events,
-    private _auth: AuthService) 
+    private _events: Events) 
   {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

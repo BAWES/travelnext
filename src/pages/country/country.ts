@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { CountrySelectionPage } from '../country-selection/country-selection';
-
 @Component({
   selector: 'page-country',
   templateUrl: 'country.html'
@@ -18,7 +16,6 @@ export class CountryPage {
       this.country = params.get("country");
 
       this.country.languages = this._convertEnumerable(this.country.languages);
-      console.log(this.country);
   }
 
   // Make an object enumerable

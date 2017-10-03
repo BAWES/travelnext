@@ -11,7 +11,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-
 // Pages
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
