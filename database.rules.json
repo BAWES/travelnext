@@ -43,19 +43,6 @@
         }
       }
     },
-
-    // The people that are following a specific user.
-    "user-followers": {
-      "$user_id": {
-        ".read": true,
-        ".write": false,
-
-        "$follower_user_id": {
-          ".validate": 
-            "root.child('users').hasChild($follower_user_id) && (newData.val() === true) && ($follower_user_id != $user_id)"
-        }
-      }
-    },
       
     // Storage of country selection
     "user-country-selection": {
