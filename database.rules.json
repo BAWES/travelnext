@@ -35,7 +35,8 @@
         ".write": "$user_id === auth.uid",
 
         "$following_user_id": {
-          ".validate": "root.child('users').hasChild($following_user_id) && (newData.val() === true)"
+          ".validate": 
+          "root.child('users').hasChild($following_user_id) && (newData.val() === true) && ($following_user_id != $user_id)"
         }
       }
     },
