@@ -53,7 +53,7 @@ exports.storeFollowingOnFollow = functions.database.ref('/user-following/{user_i
 
         // User Following Count Increase
         let followingCountRef = rootRef.child(`/users/${userId}/numFollowing`);
-        let followerCountPromise = followingCountRef.transaction(function(current) {
+        let followingCountPromise = followingCountRef.transaction(function(current) {
             if (event.data.exists() && !event.data.previous.exists()) {
                 return (current || 0) + 1;
             }
@@ -63,5 +63,5 @@ exports.storeFollowingOnFollow = functions.database.ref('/user-following/{user_i
         });
 
         // Return all promises
-        return Promise.all([followerCountPromise, followingCountRef]);
+        return Promise.all([followerCountPromise, followingCountPromise]);
     });
