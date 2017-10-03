@@ -15,7 +15,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // Pages
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
-import { WorldPage } from '../pages/world/world';
 import { FriendsPage } from '../pages/friends/friends';
 import { CountryPage } from '../pages/country/country';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -50,7 +49,6 @@ export const firebaseConfig = {
     MyApp,
     AboutPage,
     HomePage,
-    WorldPage,
     FriendsPage,
     CountryPage,
     LoginPage,
@@ -70,7 +68,6 @@ export const firebaseConfig = {
     MyApp,
     AboutPage,
     HomePage,
-    WorldPage,
     FriendsPage,
     CountryPage,
     LoginPage,
