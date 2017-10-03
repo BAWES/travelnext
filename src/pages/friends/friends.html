@@ -11,12 +11,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <!-- <button ion-item *ngFor="let user of friendSearchResults | async" (click)="loadUserPage(user)">
+  <ion-grid text-center *ngIf="user">
+      <ion-row>
+        <ion-col>
+          <b>Following</b><br/>
+          {{ user.numFollowing? user.numFollowing : 0 }}
+        </ion-col>
+        <ion-col>
+          <b>Followers</b><br/>
+          {{ user.numFollowers? user.numFollowers : 0 }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  <section text-center *ngIf="friendDataLoaded && !friendData.length">
+    <h3>Follow your friends for easy access to the countries they've visited</h3>
+    <button ion-button (click)="loadSearchPage()">
+      Search for friends
+    </button>
+  </section>
+  <ion-list *ngIf="friendDataLoaded && friendData && friendData.length">
+    <button ion-item *ngFor="let user of friendData" (click)="loadUserPage(user)">
       <ion-avatar item-start *ngIf="user.profilePhoto">
         <img [src]="user.profilePhoto">
       </ion-avatar>
       <h2>{{ user.displayName }}</h2>
-    </button> -->
+    </button>
   </ion-list>
 </ion-content>
