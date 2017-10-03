@@ -5,7 +5,7 @@
     <ion-buttons right *ngIf="auth.uid != user.$key">
       <button ion-button clear color="primary" 
         [disabled]="!allowSave"
-        (click)="save()">
+        (click)="toggleFollow()">
         {{ actionText }}
       </button>
     </ion-buttons>

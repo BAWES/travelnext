@@ -48,7 +48,7 @@
     "user-followers": {
       "$user_id": {
         ".read": true,
-        ".write": "$user_id === auth.uid",
+        ".write": false,
 
         "$follower_user_id": {
           ".validate": 

@@ -37,6 +37,13 @@ export class UserProfilePage {
     this.userCountrySubscription.unsubscribe();
   }
 
+  /**
+   * Follow or unfollow user
+   */
+  toggleFollow(){
+
+  }
+
   loadUserCountrySelection(userKey) {
     this.userCountrySubscription = this.db.list(`/user-country-selection/${userKey}`).subscribe((regions) => {
       this.isLoading = false;
