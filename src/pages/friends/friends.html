@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Friends</ion-title>
+  </ion-navbar>
+  <ion-searchbar (ionInput)="search($event)" placeholder="Search for a friend">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let user of friendList"
+      (click)="loadUserPage(user)">
+      Friend name here
+    </button>
+  </ion-list>
+</ion-content>
