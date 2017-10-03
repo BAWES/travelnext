@@ -58,6 +58,7 @@ export class AuthService {
             // Update user latest data
             this._db.object(`/users/${user.uid}`).update({
                 displayName: user.displayName,
+                displayNameLowercase: user.displayName.toLowerCase(),
                 profilePhoto: user.photoURL,
                 lastOnline: firebase.database.ServerValue.TIMESTAMP
             });
