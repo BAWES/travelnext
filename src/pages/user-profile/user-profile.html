@@ -2,11 +2,14 @@
   <ion-navbar>
     <ion-title>{{ user.displayName }}</ion-title>
 
-    <ion-buttons right *ngIf="auth.uid != user.$key">
+    <ion-buttons right *ngIf="(auth.uid != user.$key) && !isLoadingFollowStatus">
       <button ion-button clear color="primary" 
-        [disabled]="!allowSave"
-        (click)="toggleFollow()">
-        {{ actionText }}
+        (click)="follow()" *ngIf="!isFollowing">
+        Follow
+      </button>
+      <button ion-button clear color="primary" 
+        (click)="unfollow()" *ngIf="isFollowing">
+        Unfollow
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -43,7 +46,7 @@
   </section>
 
   <!-- Region/Country List -->
-  <ion-list *ngIf="selectedCountriesByRegion.length" class='regions'>
+  <ion-list *ngIf="!isLoading && selectedCountriesByRegion.length" class='regions'>
     <section *ngFor="let region of selectedCountriesByRegion" [class]='region.name'>
       <ion-list-header>
         {{ region.name }} 

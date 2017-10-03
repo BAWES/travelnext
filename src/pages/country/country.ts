@@ -15,7 +15,9 @@ export class CountryPage {
   ) {
       this.country = params.get("country");
 
-      this.country.languages = this._convertEnumerable(this.country.languages);
+      if(this.country && this.country.languages){
+        this.country.languages = this._convertEnumerable(this.country.languages);
+      }
   }
 
   // Make an object enumerable

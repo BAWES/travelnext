@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { CountryPage } from '../country/country';
 
@@ -15,11 +15,14 @@ export class UserProfilePage {
   public user;
   public selectedCountriesByRegion = [];
 
+  public followStatusObject: FirebaseObjectObservable<any>;
+  public isFollowing = false;
+
   public isLoading = true;
+  public isLoadingFollowStatus = true;
   public userCountrySubscription;
-
-  public actionText = "Follow";
-
+  public followStatusSubscription;
+  
   constructor(
     public navCtrl: NavController,
     public db: AngularFireDatabase,
@@ -31,17 +34,30 @@ export class UserProfilePage {
 
   ionViewWillEnter(){
     this.loadUserCountrySelection(this.user.$key);
+    this.loadFollowStatus();
   }
 
   ionViewWillLeave(){
     this.userCountrySubscription.unsubscribe();
+    this.followStatusSubscription.unsubscribe();
   }
 
-  /**
-   * Follow or unfollow user
-   */
-  toggleFollow(){
+  follow(){
+    if(this.isFollowing) return;
+    this.followStatusObject.set(true).then(res => console.log(res));
+  }
 
+  unfollow(){
+    if(!this.isFollowing) return;
+    this.followStatusObject.remove().then(res => console.log(res));
+  }
+
+  loadFollowStatus(){
+    this.followStatusObject = this.db.object(`/user-following/${this.auth.uid}/${this.user.$key}`)
+    this.followStatusSubscription = this.followStatusObject.subscribe((result) => {
+      this.isFollowing = result.$exists();
+      this.isLoadingFollowStatus = false;
+    });
   }
 
   loadUserCountrySelection(userKey) {
