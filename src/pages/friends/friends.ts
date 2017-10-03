@@ -39,25 +39,20 @@ export class FriendsPage {
 
     if(!userInput){
       this.isSearching = false;
-      // this.friendList = this.countrySrvc.countriesByRegion;
       return;
     }
 
     this.isSearching = true;
+    let searchStr = userInput.toLowerCase();
     // Load search results based on input
     this.friendSearchResults = this._db.list("/users", {
       query: {
-        orderByChild: 'displayName',
+        orderByChild: 'displayNameLowercase',
         limitToFirst: 10,
-        startAt: userInput,
-        endAt: userInput+"\uf8ff"
+        startAt: searchStr,
+        endAt: searchStr+"\uf8ff"
       }
     });
-    
-    // (ref) => {
-    //   return ref.orderByChild('size').equalTo('large');
-    // });
-
   }
 
 }
