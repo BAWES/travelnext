@@ -62,7 +62,7 @@
       "$user_id": {
         // grants read/write access to the owner of this user account
         // whose uid must exactly match the key ($user_id)
-        ".read": "$user_id === auth.uid",
+        ".read": true,
         ".write": "$user_id === auth.uid",
           
         "$region": {

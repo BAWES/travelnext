@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-import { CountryPage } from '../country/country';
+import { UserProfilePage } from '../user-profile/user-profile';
 
 import { CountryService } from '../../providers/country.service';
 
@@ -24,9 +24,9 @@ export class FriendsPage {
   ) {
   }
 
-  loadUserPage(country){
-    this.navCtrl.push(CountryPage, {
-      country: country
+  loadUserPage(user){
+    this.navCtrl.push(UserProfilePage, {
+      user: user
     });
   }
 
