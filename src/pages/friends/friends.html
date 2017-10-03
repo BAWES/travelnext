@@ -35,6 +35,10 @@
         <img [src]="user.profilePhoto">
       </ion-avatar>
       <h2>{{ user.displayName }}</h2>
+      <p>{{ user.totalCountriesVisited? user.totalCountriesVisited : 0 }} countries visited</p>
+      <ion-badge item-right *ngIf="user.totalCountriesVisited>0">
+        {{ ((user.totalCountriesVisited / countrySrvc.worldCountryCount) * 100) | number:'1.0-0' }}%
+      </ion-badge>
     </button>
   </ion-list>
 </ion-content>

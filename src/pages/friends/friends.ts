@@ -6,6 +6,7 @@ import { UserProfilePage } from '../user-profile/user-profile';
 import { FriendSearchPage } from '../friend-search/friend-search';
 
 import { AuthService } from '../../providers/auth.service'
+import { CountryService } from '../../providers/country.service'
 
 @Component({
   selector: 'page-friends',
@@ -23,7 +24,8 @@ export class FriendsPage {
   constructor(
     public navCtrl: NavController, 
     public db: AngularFireDatabase,
-    private _auth: AuthService
+    private _auth: AuthService,
+    public countrySrvc: CountryService
   ) {
     this.setupSubscriptions();
   }

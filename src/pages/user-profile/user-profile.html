@@ -28,6 +28,10 @@
       <ion-grid text-center>
         <ion-row>
           <ion-col>
+            <b>Countries</b><br/>
+            {{ user.totalCountriesVisited? user.totalCountriesVisited : 0 }}
+          </ion-col>
+          <ion-col>
             <b>Following</b><br/>
             {{ user.numFollowing? user.numFollowing : 0 }}
           </ion-col>
