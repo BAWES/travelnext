@@ -36,7 +36,20 @@
 
         "$following_user_id": {
           ".validate": 
-          "root.child('users').hasChild($following_user_id) && (newData.val() === true) && ($following_user_id != $user_id)"
+            "root.child('users').hasChild($following_user_id) && (newData.val() === true) && ($following_user_id != $user_id)"
+        }
+      }
+    },
+
+    // The people that are following a specific user.
+    "user-followers": {
+      "$user_id": {
+        ".read": true,
+        ".write": "$user_id === auth.uid",
+
+        "$follower_user_id": {
+          ".validate": 
+            "root.child('users').hasChild($follower_user_id) && (newData.val() === true) && ($follower_user_id != $user_id)"
         }
       }
     },
