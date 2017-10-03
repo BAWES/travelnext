@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { CountryPage } from '../country/country';
 
@@ -11,11 +12,15 @@ import { CountryService } from '../../providers/country.service';
 })
 export class FriendsPage {
 
-  public friendList;
+  public isSearching = false;
+
+  public friendList: FirebaseListObservable<any>;
+  public friendSearchResults: FirebaseListObservable<any>;
 
   constructor(
     public navCtrl: NavController, 
-    public countrySrvc: CountryService
+    public countrySrvc: CountryService,
+    private _db: AngularFireDatabase
   ) {
   }
 
@@ -33,25 +38,26 @@ export class FriendsPage {
     let userInput = $event.target.value;
 
     if(!userInput){
-      this.friendList = this.countrySrvc.countriesByRegion;
+      this.isSearching = false;
+      // this.friendList = this.countrySrvc.countriesByRegion;
       return;
     }
 
-    this.friendList = [];
-    this.countrySrvc.countriesByRegion.forEach(region => {
-      let filteredCountries = region.countries.filter(country => {
-        if((country.name.common.toLowerCase().indexOf(userInput.toLowerCase()) !== -1)){
-          return true;
-        }
-        return false;
-      });
-      // If there are results from filtered countries, push them to the list
-      if(filteredCountries.length){
-        let newRegionData = JSON.parse(JSON.stringify(region));
-        newRegionData.countries = filteredCountries;
-        this.friendList.push(newRegionData);
+    this.isSearching = true;
+    // Load search results based on input
+    this.friendSearchResults = this._db.list("/users", {
+      query: {
+        orderByChild: 'displayName',
+        limitToFirst: 10,
+        startAt: userInput,
+        endAt: userInput+"\uf8ff"
       }
     });
+    
+    // (ref) => {
+    //   return ref.orderByChild('size').equalTo('large');
+    // });
+
   }
 
 }

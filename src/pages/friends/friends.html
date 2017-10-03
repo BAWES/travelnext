@@ -7,10 +7,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let user of friendList"
-      (click)="loadUserPage(user)">
-      Friend name here
+  <ion-list *ngIf="isSearching">
+    <button ion-item *ngFor="let user of friendSearchResults | async" (click)="loadUserPage(user)">
+      <ion-avatar item-start *ngIf="user.profilePhoto">
+        <img [src]="user.profilePhoto">
+      </ion-avatar>
+      <h2>{{ user.displayName }}</h2>
     </button>
   </ion-list>
 </ion-content>
