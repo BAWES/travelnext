@@ -1,0 +1,78 @@
+page-user-profile {
+    .full-height{height: 100% !important;}
+    .headerArea{
+        ion-item{background: 0}
+        background: url('../assets/africa.jpg');
+    }
+
+    .worldProgress{
+        text-align: center;
+        padding: 5%;
+        padding-top: 2%;
+        color: black;
+        // background: white;
+        background-size: cover;
+
+        h1.top{
+            font-weight:bold;
+            font-size:1.2em
+        }
+        h1.middle{
+            font-weight: bold;
+            margin-top: -0.3em;
+            font-size:2.5em;
+        }
+        h1.bottom{
+            font-size:1em;
+            margin-top: -0.8em;
+        }
+    }
+
+    .regions{
+        ion-list-header{
+            color: black;
+            font-weight: bold;
+            background: white no-repeat;
+            background-size: cover;
+            font-size: 1.4em;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            ion-badge{
+                // font-size:0.9em;
+                border: 1px solid black;
+                background: black;
+            }
+        }
+        .Africa{
+            ion-list-header{
+                background-image: url('../assets/africa.jpg');
+            }
+        }
+        .Americas{
+            ion-list-header{
+                background-image: url('../assets/americas.jpg');
+            }
+        }
+        .Antartica{
+            ion-list-header{
+                background-image: url('../assets/antartica.jpg');
+            }
+        }
+        .Asia{
+            ion-list-header{
+                background-image: url('../assets/asia.jpg');
+            }
+        }
+        .Europe{
+            ion-list-header{
+                background-image: url('../assets/europe.jpg');
+            }
+        }
+        .Oceania{
+            ion-list-header{
+                background-image: url('../assets/oceania.jpg');
+            }
+        }
+    }
+}

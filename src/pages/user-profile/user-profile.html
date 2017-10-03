@@ -1,0 +1,48 @@
+<ion-content>
+  <div class='headerArea' [class.full-height]="countrySrvc.countriesByRegion.length && !userSrvc.selectedCountriesByRegion.length">
+    <ion-item>
+      <ion-avatar item-start *ngIf="auth.photo">
+        <img [src]="auth.photo">
+      </ion-avatar>
+      <h2>{{ auth.displayName }}</h2>
+    </ion-item>
+
+    <section class='worldProgress' *ngIf="userSrvc.selectedCountriesByRegion.length">
+      <h1 class='top'>You've covered</h1>
+      <h1 class='middle' *ngIf="userSrvc.numCountriesVisited">
+        {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
+      </h1>
+      <h1 class='bottom'>of the world</h1>
+      <button ion-button outline color="dark"
+        (click)="selectCountries()" *ngIf="countrySrvc.countriesByRegion.length">
+        Select countries
+      </button>
+      <button ion-button outline color="dark"
+        (click)="selectCountries()">
+        Share
+      </button>
+    </section>
+
+    <!-- If no countries selected yet -->
+    <section padding margin-top text-center *ngIf="countrySrvc.countriesByRegion.length && !userSrvc.selectedCountriesByRegion.length">
+      <h1>Keep track of the countries you've visited</h1>
+      <button ion-button (click)="selectCountries()">
+        Get Started
+      </button>
+    </section>
+  </div>
+
+  <!-- Region/Country List -->
+  <ion-list *ngIf="userSrvc.selectedCountriesByRegion.length" class='regions'>
+    <section *ngFor="let region of userSrvc.selectedCountriesByRegion" [class]='region.name'>
+      <ion-list-header>
+        {{ region.name }} 
+        <ion-badge item-right>{{ ((region.numCountriesSelected / region.totalCountriesInRegion) * 100) | number:'1.0-0'}}%</ion-badge>
+      </ion-list-header>
+      <button ion-item *ngFor="let country of region.countries"
+        (click)="loadCountry(country)">
+        {{ country.name.common }}
+      </button>
+    </section>
+  </ion-list>
+</ion-content>
