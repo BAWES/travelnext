@@ -44,12 +44,12 @@ export class UserProfilePage {
 
   follow(){
     if(this.isFollowing) return;
-    this.followStatusObject.set(true).then(res => console.log(res));
+    this.followStatusObject.set(true);
   }
 
   unfollow(){
     if(!this.isFollowing) return;
-    this.followStatusObject.remove().then(res => console.log(res));
+    this.followStatusObject.remove();
   }
 
   loadFollowStatus(){
