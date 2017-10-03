@@ -1,6 +1,14 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ user.displayName }}</ion-title>
+
+    <ion-buttons right>
+      <button ion-button clear color="primary" 
+        [disabled]="!allowSave"
+        (click)="save()">
+        {{ actionText }}
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>

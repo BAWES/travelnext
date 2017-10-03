@@ -18,6 +18,8 @@ export class UserProfilePage {
   public isLoading = true;
   public userCountrySubscription;
 
+  public actionText = "Follow";
+
   constructor(
     public navCtrl: NavController,
     public db: AngularFireDatabase,
