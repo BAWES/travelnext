@@ -3,10 +3,12 @@
     
     "users": {
       "$user_id": {
-        // grants read/write access to the owner of this user account
+        // anyone can read.
+        // grants write access to the owner of this user account
         // whose uid must exactly match the key ($user_id)
-        ".read": "$user_id === auth.uid",
+        ".read": true,
         ".write": "$user_id === auth.uid",
+        ".indexOn": ["displayName", "numFollowers"],
 
         // Set the Allowed Fields to be written
         "displayName": {
@@ -22,6 +24,18 @@
         // Any other fields not allowed
         "$any": {
           ".validate": false
+        }
+      }
+    },
+
+    // The people a specific user is following
+    "user-following": {
+      "$user_id": {
+        ".read": true,
+        ".write": "$user_id === auth.uid",
+
+        "$following_user_id": {
+          ".validate": "root.child('users').hasChild($following_user_id) && (newData.val() === true)"
         }
       }
     },
