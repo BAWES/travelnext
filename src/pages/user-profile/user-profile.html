@@ -1,13 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ user.displayName }}</ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content>
-  <div class='headerArea' [class.full-height]="countrySrvc.countriesByRegion.length && !userSrvc.selectedCountriesByRegion.length">
-    <ion-item>
-      <ion-avatar item-start *ngIf="auth.photo">
-        <img [src]="auth.photo">
-      </ion-avatar>
-      <h2>{{ auth.displayName }}</h2>
-    </ion-item>
+  <div class='headerArea'>
+      <img *ngIf="user.photo" [src]="user.photo">
 
-    <section class='worldProgress' *ngIf="userSrvc.selectedCountriesByRegion.length">
+    <!-- <section class='worldProgress' *ngIf="userSrvc.selectedCountriesByRegion.length">
       <h1 class='top'>You've covered</h1>
       <h1 class='middle' *ngIf="userSrvc.numCountriesVisited">
         {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
@@ -21,20 +21,22 @@
         (click)="selectCountries()">
         Share
       </button>
-    </section>
-
-    <!-- If no countries selected yet -->
-    <section padding margin-top text-center *ngIf="countrySrvc.countriesByRegion.length && !userSrvc.selectedCountriesByRegion.length">
-      <h1>Keep track of the countries you've visited</h1>
-      <button ion-button (click)="selectCountries()">
-        Get Started
-      </button>
-    </section>
+    </section> -->
   </div>
 
+  <!-- If data is being loaded -->
+  <div text-center *ngIf="isLoading" margin padding>
+    <ion-spinner text-center style='width: 58px;'></ion-spinner>
+  </div>
+
+  <!-- If no countries selected -->
+  <section text-center *ngIf="!isLoading && !selectedCountriesByRegion.length">
+    <h3>No countries selected</h3>
+  </section>
+
   <!-- Region/Country List -->
-  <ion-list *ngIf="userSrvc.selectedCountriesByRegion.length" class='regions'>
-    <section *ngFor="let region of userSrvc.selectedCountriesByRegion" [class]='region.name'>
+  <ion-list *ngIf="selectedCountriesByRegion.length" class='regions'>
+    <section *ngFor="let region of selectedCountriesByRegion" [class]='region.name'>
       <ion-list-header>
         {{ region.name }} 
         <ion-badge item-right>{{ ((region.numCountriesSelected / region.totalCountriesInRegion) * 100) | number:'1.0-0'}}%</ion-badge>

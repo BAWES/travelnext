@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { CountryPage } from '../country/country';
-import { CountrySelectionPage } from '../country-selection/country-selection';
 
 import { AuthService } from '../../providers/auth.service';
-import { UserService } from '../../providers/user.service';
-import { CountryService } from '../../providers/country.service';
 
 @Component({
   selector: 'page-user-profile',
@@ -15,26 +12,50 @@ import { CountryService } from '../../providers/country.service';
 })
 export class UserProfilePage {
 
-  public userData: FirebaseListObservable<any>;
+  public user;
+  public selectedCountriesByRegion = [];
+
+  public isLoading = true;
+  public userCountrySubscription;
 
   constructor(
     public navCtrl: NavController,
     public db: AngularFireDatabase,
     public auth: AuthService,
-    public userSrvc: UserService,
-    public countrySrvc: CountryService,
     params: NavParams
   ) {
-    let userSelected = params.get("user");
-
-    // this.db.object
+    this.user = params.get("user");
   }
 
-  selectCountries(){
-    this.navCtrl.push(CountrySelectionPage);
+  ionViewWillEnter(){
+    this.loadUserCountrySelection(this.user.$key);
   }
 
-  loadCountry(country){
+  ionViewWillLeave(){
+    this.userCountrySubscription.unsubscribe();
+  }
+
+  loadUserCountrySelection(userKey) {
+    this.userCountrySubscription = this.db.list(`/user-country-selection/${userKey}`).subscribe((regions) => {
+      this.isLoading = false;
+      this.selectedCountriesByRegion = [];
+      regions.forEach(region => {
+        // Make countries iterable
+        if (region.countries) {
+          let countryList = [];
+          Object.keys(region.countries).forEach(countryKey => {
+            let country = region.countries[countryKey];
+            country.$key = countryKey;
+            countryList.push(country);
+          });
+          region.countries = countryList;
+        }
+        this.selectedCountriesByRegion.push(region);
+      });
+    });
+  }
+
+  loadCountry(country) {
     this.navCtrl.push(CountryPage, {
       country: country
     });
