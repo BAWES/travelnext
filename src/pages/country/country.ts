@@ -16,7 +16,18 @@ export class CountryPage {
     params: NavParams 
   ) {
       this.country = params.get("country");
+
+      this.country.languages = this._convertEnumerable(this.country.languages);
       console.log(this.country);
+  }
+
+  // Make an object enumerable
+  private _convertEnumerable(objectArray){
+    let enumerable = [];
+    Object.keys(objectArray).forEach(objectKey => {
+      enumerable.push(objectArray[objectKey]);
+    });
+    return enumerable;
   }
 
 }

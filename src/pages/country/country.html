@@ -1,11 +1,47 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Country Name Here</ion-title>
+    <ion-title>{{ country.name.common }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    
+    <!-- Capital -->
+    <section *ngIf="country.capital">
+        <ion-list-header>Capital</ion-list-header>
+        <ion-item>
+          {{ country.capital }}
+        </ion-item>
+      </section>
+    <!-- Area -->
+    <section *ngIf="country.area">
+      <ion-list-header>Area</ion-list-header>
+      <ion-item>
+        {{ country.area | number }} km<sup>2</sup>
+      </ion-item>
+    </section>
+    <!-- Languages -->
+    <section *ngIf="country.languages">
+      <ion-list-header>Language</ion-list-header>
+      <ion-item *ngFor="let language of country.languages">
+        {{ language }}
+      </ion-item>
+    </section>
+    <!-- Currency -->
+    <section *ngIf="country.currency">
+      <ion-list-header>Currency</ion-list-header>
+      <ion-item *ngFor="let currency of country.currency">
+        {{ currency }}
+      </ion-item>
+    </section>
+    <!-- Calling Code -->
+    <section *ngIf="country.callingCode">
+      <ion-list-header>Calling Code</ion-list-header>
+      <ion-item *ngFor="let code of country.callingCode">
+        +{{ code }}
+      </ion-item>
+    </section>
+
   </ion-list>
+  <!-- {{ country | json }} -->
 </ion-content>
