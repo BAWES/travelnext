@@ -7,7 +7,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <section padding *ngIf="(friendSearchResults | async) == false">
+    <h3>Couldn't find anyone with that name</h3>
+  </section>
+  <ion-list *ngIf="(friendSearchResults | async) != false">
     <button ion-item *ngFor="let user of friendSearchResults | async" (click)="loadUserPage(user)">
       <ion-avatar item-start *ngIf="user.profilePhoto">
         <img [src]="user.profilePhoto">

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import 'rxjs/add/operator/map';
 import { NavController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { UserProfilePage } from '../user-profile/user-profile';
+
 
 @Component({
   selector: 'page-friend-search',
@@ -10,7 +12,7 @@ import { UserProfilePage } from '../user-profile/user-profile';
 })
 export class FriendSearchPage {
 
-  public friendSearchResults: FirebaseListObservable<any>;
+  public friendSearchResults: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -45,6 +47,9 @@ export class FriendSearchPage {
         startAt: searchStr,
         endAt: searchStr+"\uf8ff"
       }
+    }).map(result => {
+      if(result.length > 0) return result;
+      return false;
     });
   }
 
