@@ -1,18 +1,22 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Friends</ion-title>
+
+    <ion-buttons right>
+      <button ion-button icon-only item-right clear color="dark" (click)="loadSearchPage()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-  <ion-searchbar (ionInput)="search($event)" placeholder="Search for a friend">
-  </ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="isSearching">
-    <button ion-item *ngFor="let user of friendSearchResults | async" (click)="loadUserPage(user)">
+  <ion-list>
+    <!-- <button ion-item *ngFor="let user of friendSearchResults | async" (click)="loadUserPage(user)">
       <ion-avatar item-start *ngIf="user.profilePhoto">
         <img [src]="user.profilePhoto">
       </ion-avatar>
       <h2>{{ user.displayName }}</h2>
-    </button>
+    </button> -->
   </ion-list>
 </ion-content>

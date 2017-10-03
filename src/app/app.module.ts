@@ -16,6 +16,7 @@ import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { FriendsPage } from '../pages/friends/friends';
+import { FriendSearchPage } from '../pages/friend-search/friend-search';
 import { CountryPage } from '../pages/country/country';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
@@ -51,6 +52,7 @@ export const firebaseConfig = {
     HomePage,
     UserProfilePage,
     FriendsPage,
+    FriendSearchPage,
     CountryPage,
     LoginPage,
     TabsPage,
@@ -71,6 +73,7 @@ export const firebaseConfig = {
     HomePage,
     UserProfilePage,
     FriendsPage,
+    FriendSearchPage,
     CountryPage,
     LoginPage,
     TabsPage,
