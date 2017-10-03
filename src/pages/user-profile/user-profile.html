@@ -2,10 +2,14 @@
   <ion-navbar>
     <ion-title>{{ user.displayName }}</ion-title>
 
-    <ion-buttons right>
+    <ion-buttons right *ngIf="(auth.uid != user.$key) && !isLoadingFollowStatus">
       <button ion-button clear color="primary" 
-        (click)="share()">
-        Share
+        (click)="follow()" *ngIf="!isFollowing">
+        Follow
+      </button>
+      <button ion-button clear color="primary" 
+        (click)="unfollow()" *ngIf="isFollowing">
+        Unfollow
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -33,17 +37,10 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      
-      <div *ngIf="(auth.uid != user.$key) && !isLoadingFollowStatus">
-        <button ion-button color="primary" 
-          (click)="follow()" *ngIf="!isFollowing">
-          Follow
-        </button>
-        <button ion-button outline color="danger" 
-          (click)="unfollow()" *ngIf="isFollowing">
-          Unfollow
-        </button>
-      </div>
+      <button ion-button outline color="dark"
+        (click)="share()">
+        Share
+      </button>
     </section>
   </div>
 
