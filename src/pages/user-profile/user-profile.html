@@ -13,32 +13,32 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-grid text-center>
-      <ion-row>
-        <ion-col>
-          <b>Following</b><br/>
-          {{ user.numFollowing? user.numFollowing : 0 }}
-        </ion-col>
-        <ion-col>
-          <b>Followers</b><br/>
-          {{ user.numFollowers? user.numFollowers : 0 }}
-        </ion-col>
-      </ion-row>
-    </ion-grid>
 </ion-header>
 <ion-content>
   <div class='headerArea'>
-    <!-- <section class='worldProgress' *ngIf="userSrvc.selectedCountriesByRegion.length">
-      <h1 class='top'>You've covered</h1>
-      <h1 class='middle' *ngIf="userSrvc.numCountriesVisited">
-        {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
+    <section class='worldProgress'>
+      <h1 class='top'>Explored</h1>
+      <h1 class='middle'>
+        {{ ((23 / 100) * 100) | number:'1.0-0' }}%
       </h1>
       <h1 class='bottom'>of the world</h1>
+      <ion-grid text-center>
+        <ion-row>
+          <ion-col>
+            <b>Following</b><br/>
+            {{ user.numFollowing? user.numFollowing : 0 }}
+          </ion-col>
+          <ion-col>
+            <b>Followers</b><br/>
+            {{ user.numFollowers? user.numFollowers : 0 }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <button ion-button outline color="dark"
-        (click)="selectCountries()">
+        (click)="share()">
         Share
       </button>
-    </section> -->
+    </section>
   </div>
 
   <!-- If data is being loaded -->
