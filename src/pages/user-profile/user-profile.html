@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ user.displayName }}</ion-title>
 
-    <ion-buttons right>
+    <ion-buttons right *ngIf="auth.uid != user.$key">
       <button ion-button clear color="primary" 
         [disabled]="!allowSave"
         (click)="save()">
