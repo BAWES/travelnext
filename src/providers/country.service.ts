@@ -7,6 +7,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 */
 @Injectable()
 export class CountryService {
+    public worldCountryCount = 0;
 
     public countriesByRegion = [];
 
@@ -30,6 +31,8 @@ export class CountryService {
                         let country = region.countries[countryKey];
                         country.$key = countryKey;
                         countryList.push(country);
+
+                        this.worldCountryCount++;
                     });
                     region.countries = countryList;
                 }

@@ -18,8 +18,11 @@
   <div class='headerArea'>
     <section class='worldProgress'>
       <h1 class='top'>Explored</h1>
-      <h1 class='middle'>
-        {{ ((23 / 100) * 100) | number:'1.0-0' }}%
+      <h1 class='middle' *ngIf="user.totalCountriesVisited">
+        {{ ((user.totalCountriesVisited / countrySrvc.worldCountryCount) * 100) | number:'1.0-0' }}%
+      </h1>
+      <h1 class='middle' *ngIf="!user.totalCountriesVisited">
+        0%
       </h1>
       <h1 class='bottom'>of the world</h1>
       <ion-grid text-center>

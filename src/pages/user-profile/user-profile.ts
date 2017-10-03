@@ -5,6 +5,7 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 import { CountryPage } from '../country/country';
 
 import { AuthService } from '../../providers/auth.service';
+import { CountryService } from '../../providers/country.service';
 
 @Component({
   selector: 'page-user-profile',
@@ -27,6 +28,7 @@ export class UserProfilePage {
     public navCtrl: NavController,
     public db: AngularFireDatabase,
     public auth: AuthService,
+    public countrySrvc: CountryService,
     params: NavParams
   ) {
     this.user = params.get("user");

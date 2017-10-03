@@ -47,6 +47,8 @@ export class UserService {
     initAllSelectedCountriesByRegion() {
         this.liveUserSubscription = this._db.list(`/user-country-selection/${this._auth.uid}`).subscribe((regions) => {
             this.selectedCountriesByRegion = [];
+            this.numCountriesTotal = 0;
+            this.numCountriesVisited = 0;
             regions.forEach(region => {
                 // Make countries iterable
                 if (region.countries) {

@@ -12,8 +12,8 @@
 
     <section class='worldProgress' *ngIf="userSrvc.selectedCountriesByRegion.length">
       <h1 class='top'>You've covered</h1>
-      <h1 class='middle' *ngIf="userSrvc.numCountriesVisited">
-        {{ ((userSrvc.numCountriesVisited / userSrvc.numCountriesTotal) * 100) | number:'1.0-0' }}%
+      <h1 class='middle' *ngIf="userSrvc.numCountriesVisited && countrySrvc.worldCountryCount">
+        {{ ((userSrvc.numCountriesVisited / countrySrvc.worldCountryCount) * 100) | number:'1.0-0' }}%
       </h1>
       <h1 class='bottom'>of the world</h1>
       <button ion-button outline color="dark"
