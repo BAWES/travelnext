@@ -45,30 +45,31 @@ export class UserService {
      * Keep country list by region updated.
      */
     initAllSelectedCountriesByRegion() {
-        this.liveUserSubscription = this._db.list(`/user-country-selection/${this._auth.uid}`).subscribe((regions) => {
+        this.liveUserSubscription = this._db.list(`/user-country-selection/${this._auth.uid}`).snapshotChanges().subscribe((regions) => {
             this.selectedCountriesByRegion = [];
             this.numCountriesTotal = 0;
             this.numCountriesVisited = 0;
             regions.forEach(region => {
                 // Make countries iterable
-                if (region.countries) {
+                let regionData = region.payload.val();
+                if (regionData.countries) {
                     let countryList = [];
-                    Object.keys(region.countries).forEach(countryKey => {
-                        let country = region.countries[countryKey];
+                    Object.keys(regionData.countries).forEach(countryKey => {
+                        let country = regionData.countries[countryKey];
                         country.$key = countryKey;
                         countryList.push(country);
 
                         // Append to form data model for user input.
                         this.selectedCountriesFormModel[country.$key] = true;
                     });
-                    region.countries = countryList;
+                    regionData.countries = countryList;
                 }
-                this.selectedCountriesByRegion.push(region);
+                this.selectedCountriesByRegion.push(regionData);
 
                 // Append to num countries
-                if(region.numCountriesSelected && region.totalCountriesInRegion){
-                    this.numCountriesTotal += region.totalCountriesInRegion;
-                    this.numCountriesVisited += region.numCountriesSelected;
+                if(regionData.numCountriesSelected && regionData.totalCountriesInRegion){
+                    this.numCountriesTotal += regionData.totalCountriesInRegion;
+                    this.numCountriesVisited += regionData.numCountriesSelected;
                 }
                 
             });

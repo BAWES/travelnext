@@ -21,22 +21,23 @@ export class CountryService {
      * Keep country list by region updated.
      */
     initAllCountriesByRegion() {
-        this._db.list("/regions").subscribe((regions) => {
+        this._db.list("/regions").snapshotChanges().subscribe((regions) => {
             this.countriesByRegion = [];
             regions.forEach(region => {
                 // Make countries iterable
-                if (region.countries) {
+                let regionData = region.payload.val();
+                if (regionData.countries) {
                     let countryList = [];
-                    Object.keys(region.countries).forEach(countryKey => {
-                        let country = region.countries[countryKey];
+                    Object.keys(regionData.countries).forEach(countryKey => {
+                        let country = regionData.countries[countryKey];
                         country.$key = countryKey;
                         countryList.push(country);
 
                         this.worldCountryCount++;
                     });
-                    region.countries = countryList;
+                    regionData.countries = countryList;
                 }
-                this.countriesByRegion.push(region);
+                this.countriesByRegion.push(regionData);
             });
         });
     }
