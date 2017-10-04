@@ -50,7 +50,7 @@
   </div>
 
   <!-- If data is being loaded -->
-  <div text-center *ngIf="isLoading" margin padding>
+  <div text-center *ngIf="isLoading && user.totalCountriesVisited" margin padding>
     <ion-spinner text-center style='width: 58px;'></ion-spinner>
   </div>
 

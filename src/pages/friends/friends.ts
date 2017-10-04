@@ -36,7 +36,7 @@ export class FriendsPage {
   }
 
   setupSubscriptions(){
-    this.userSubscription = this.db.object(`/users/${this._auth.uid}`).snapshotChanges().subscribe((result) => {
+    this.userSubscription = this.db.object(`/users/${this._auth.uid}`).valueChanges().subscribe((result) => {
       this.user = result;
     });
 

@@ -55,8 +55,8 @@ export class UserProfilePage {
   }
 
   loadFollowStatus(){
-    this.followStatusObject = this.db.object(`/user-following/${this.auth.uid}/${this.user.$key}`).snapshotChanges();
-    this.followStatusSubscription = this.followStatusObject.subscribe((result) => {
+    this.followStatusObject = this.db.object(`/user-following/${this.auth.uid}/${this.user.$key}`);
+    this.followStatusSubscription = this.followStatusObject.snapshotChanges().subscribe((result) => {
       this.isFollowing = result.payload.exists();
       this.isLoadingFollowStatus = false;
     });
