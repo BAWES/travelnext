@@ -47,11 +47,13 @@ export class UserProfilePage {
   follow(){
     if(this.isFollowing) return;
     this.followStatusObject.set(true);
+    this.user.numFollowers = this.user.numFollowers? ++this.user.numFollowers : 1;
   }
 
   unfollow(){
     if(!this.isFollowing) return;
     this.followStatusObject.remove();
+    this.user.numFollowers = this.user.numFollowers? --this.user.numFollowers: 0;
   }
 
   loadFollowStatus(){
