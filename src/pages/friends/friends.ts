@@ -45,7 +45,9 @@ export class FriendsPage {
       this.friendData = [];
       friendlist.forEach(friend => {
         this.db.object(`/users/${friend.payload.key}`).snapshotChanges().take(1).subscribe(userData => {
-          this.friendData.push(userData);
+          let user = userData.payload.val();
+          user.$key = userData.payload.key;
+          this.friendData.push(user);
         });
       });
     });
