@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { CountryPage } from '../country/country';
 
@@ -16,7 +16,7 @@ export class UserProfilePage {
   public user;
   public selectedCountriesByRegion = [];
 
-  public followStatusObject: FirebaseObjectObservable<any>;
+  public followStatusObject: any;
   public isFollowing = false;
 
   public isLoading = true;
@@ -55,29 +55,30 @@ export class UserProfilePage {
   }
 
   loadFollowStatus(){
-    this.followStatusObject = this.db.object(`/user-following/${this.auth.uid}/${this.user.$key}`)
+    this.followStatusObject = this.db.object(`/user-following/${this.auth.uid}/${this.user.$key}`).snapshotChanges();
     this.followStatusSubscription = this.followStatusObject.subscribe((result) => {
-      this.isFollowing = result.$exists();
+      this.isFollowing = result.payload.exists();
       this.isLoadingFollowStatus = false;
     });
   }
 
   loadUserCountrySelection(userKey) {
-    this.userCountrySubscription = this.db.list(`/user-country-selection/${userKey}`).subscribe((regions) => {
+    this.userCountrySubscription = this.db.list(`/user-country-selection/${userKey}`).snapshotChanges().subscribe((regions) => {
       this.isLoading = false;
       this.selectedCountriesByRegion = [];
       regions.forEach(region => {
         // Make countries iterable
-        if (region.countries) {
+        let regionData = region.payload.val();
+        if (regionData.countries) {
           let countryList = [];
-          Object.keys(region.countries).forEach(countryKey => {
-            let country = region.countries[countryKey];
+          Object.keys(regionData.countries).forEach(countryKey => {
+            let country = regionData.countries[countryKey];
             country.$key = countryKey;
             countryList.push(country);
           });
-          region.countries = countryList;
+          regionData.countries = countryList;
         }
-        this.selectedCountriesByRegion.push(region);
+        this.selectedCountriesByRegion.push(regionData);
       });
     });
   }
