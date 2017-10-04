@@ -36,16 +36,18 @@ export class FriendsPage {
   }
 
   setupSubscriptions(){
-    this.userSubscription = this.db.object(`/users/${this._auth.uid}`).subscribe((result) => {
+    this.userSubscription = this.db.object(`/users/${this._auth.uid}`).valueChanges().subscribe((result) => {
       this.user = result;
     });
 
-    this.followingSubscription = this.db.list(`/user-following/${this._auth.uid}`).subscribe((friendlist) => {
+    this.followingSubscription = this.db.list(`/user-following/${this._auth.uid}`).snapshotChanges().subscribe((friendlist) => {
       this.friendDataLoaded = true;
       this.friendData = [];
       friendlist.forEach(friend => {
-        this.db.object(`/users/${friend.$key}`).take(1).subscribe(userData => {
-          this.friendData.push(userData);
+        this.db.object(`/users/${friend.payload.key}`).snapshotChanges().take(1).subscribe(userData => {
+          let user = userData.payload.val();
+          user.$key = userData.payload.key;
+          this.friendData.push(user);
         });
       });
     });
