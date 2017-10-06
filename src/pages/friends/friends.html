@@ -23,7 +23,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  <section text-center *ngIf="friendDataLoaded && !friendData.length">
+  <section text-center *ngIf="!friendData.length">
     <h3>Follow your friends for easy access to the countries they've visited</h3>
     <button ion-button (click)="loadSearchPage()">
       Search for friends
