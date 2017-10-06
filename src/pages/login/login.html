@@ -1,15 +1,18 @@
 <ion-content padding text-center>
   <img class='logo' src='../assets/logo-trans.png'/>
 
-  <section class='loginButtons'>
-    <button ion-button block icon-left color="danger" (click)="loginWithGoogle()">
-      <ion-icon name="logo-googleplus"></ion-icon>
-      Login with Google 
-    </button>
-    <button ion-button block (click)="loginWithFacebook()">
-      <ion-icon class='pad' name="logo-facebook"></ion-icon>
-      Login with Facebook 
-    </button>
-  </section>
+  <ion-card class='loginButtons'>
+    <ion-card-title padding>Keep track of the countries you've visited and compare with friends!</ion-card-title>
+    <ion-card-content>
+      <button ion-button block icon-left color="danger" (click)="loginWithGoogle()">
+        <ion-icon name="logo-googleplus"></ion-icon>
+        Login with Google 
+      </button>
+      <button ion-button block (click)="loginWithFacebook()">
+        <ion-icon class='pad' name="logo-facebook"></ion-icon>
+        Login with Facebook 
+      </button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
