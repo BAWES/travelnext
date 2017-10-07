@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheetController } from 'ionic-angular';
+import { Platform, NavController, ActionSheetController } from 'ionic-angular';
+
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { CountryPage } from '../country/country';
 import { CountrySelectionPage } from '../country-selection/country-selection';
@@ -19,8 +21,20 @@ export class HomePage {
     public auth: AuthService,
     public userSrvc: UserService,
     public countrySrvc: CountryService,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public platform: Platform,
+    private _socialSharing: SocialSharing
   ) {
+  }
+
+  share(){
+    var options = {
+      message: 'share this', // not supported on some apps (Facebook, Instagram)
+      subject: 'the subject', // fi. for email
+      files: ['', ''], // an array of filenames either locally or remotely
+      url: 'https://www.website.com/foo/#bar?a=b',
+      chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+    };
   }
 
   selectCountries(){

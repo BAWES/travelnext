@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Platform, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { CountryPage } from '../country/country';
 
@@ -29,7 +31,9 @@ export class UserProfilePage {
     public db: AngularFireDatabase,
     public auth: AuthService,
     public countrySrvc: CountryService,
-    params: NavParams
+    params: NavParams,
+    public platform: Platform,
+    private _socialSharing: SocialSharing
   ) {
     this.user = params.get("user");
   }

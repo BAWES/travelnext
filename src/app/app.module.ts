@@ -34,6 +34,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 // AF2 Dev Env Settings 
 export const firebaseConfig = {
@@ -87,6 +88,7 @@ export const firebaseConfig = {
     Facebook,
     Camera,
     File,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     // Custom
     AuthService,
