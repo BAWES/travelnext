@@ -1,3 +1,18 @@
 page-login {
+    .logo{width:200px;}
 
+    ion-content{
+        background: url("../assets/loginbg.jpg");
+        background-size: cover;
+
+        .loginButtons{
+            max-width: 400px;
+            margin: 0 auto;
+
+            button{
+                margin-bottom:10px;
+                .pad{padding-right: 5px;}
+            }
+        }
+    }
 }
