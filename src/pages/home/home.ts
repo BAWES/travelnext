@@ -28,13 +28,15 @@ export class HomePage {
   }
 
   share(){
+    if(!this.platform.is("cordova")) return;
+    
+    let progressCompleted = Math.ceil((this.userSrvc.numCountriesVisited / this.countrySrvc.worldCountryCount) * 100);
     var options = {
-      message: 'share this', // not supported on some apps (Facebook, Instagram)
-      subject: 'the subject', // fi. for email
-      files: ['', ''], // an array of filenames either locally or remotely
-      url: 'https://www.website.com/foo/#bar?a=b',
-      chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+      message: `I've visited ${progressCompleted}% of all countries in the world. #TravelNextApp @TravelNextApp`, // not supported on some apps (Facebook, Instagram)
+      subject: 'My trips around the world on TravelNext App', // fi. for email
+      url: 'http://onelink.to/f6acjt',
     };
+    this._socialSharing.shareWithOptions(options);
   }
 
   selectCountries(){

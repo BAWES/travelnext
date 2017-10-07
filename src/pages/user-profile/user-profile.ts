@@ -48,6 +48,18 @@ export class UserProfilePage {
     this.followStatusSubscription.unsubscribe();
   }
 
+  share(){
+    if(!this.platform.is("cordova")) return;
+    
+    let progressCompleted = Math.ceil((this.user.totalCountriesVisited / this.countrySrvc.worldCountryCount) * 100);
+    var options = {
+      message: `${this.user.displayName} has visited ${progressCompleted}% of all countries in the world. #TravelNextApp @TravelNextApp`, // not supported on some apps (Facebook, Instagram)
+      subject: 'Check out ${this.user.displayName} on TravelNext App', // fi. for email
+      url: 'http://onelink.to/f6acjt',
+    };
+    this._socialSharing.shareWithOptions(options);
+  }
+
   follow(){
     if(this.isFollowing) return;
     this.followStatusObject.set(true);
