@@ -23,7 +23,7 @@ It was created using the following command:
 When asked for Alias it is `travelnext_android`
 
 ### Jarsigner
-`jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android-release-key.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk plugn_android`
+`jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore android-release-key.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk travelnext_android`
 
 This signs the apk in place.
 
@@ -33,6 +33,11 @@ Finally, we need to run the zip align tool to optimize the APK. The zipalign too
 
 For example, on OS X with Android Studio installed, zipalign is in `~/Library/Android/sdk/build-tools/VERSION/zipalign`
 
-`./zipalign -v 4 /Users/BAWES/Sites/plugnMobile/platforms/android/build/outputs/apk/android-release-unsigned.apk /Users/BAWES/Sites/plugnMobile/platforms/android/build/outputs/apk/android-release.apk`
+`./zipalign -v 4 /Users/BAWES/Sites/travelnext/platforms/android/build/outputs/apk/android-release-unsigned.apk /Users/BAWES/Sites/travelnext/platforms/android/build/outputs/apk/android-signed.apk`
 
 Now we have our final release binary called HelloWorld.apk and we can release this on the Google Play Store for all the world to enjoy!
+
+
+## Get Key Hash for Facebook
+
+`cat deployment_cert.der | openssl sha1 -binary | openssl base64`
