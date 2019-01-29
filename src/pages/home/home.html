@@ -21,8 +21,8 @@
         <ion-icon name="md-globe"></ion-icon>
         Select countries
       </button>
-      <button ion-button icon-left outline color="dark"
-        (click)="selectCountries()">
+      <button ion-button icon-left outline color="dark" *ngIf="platform.is('cordova')"
+        (click)="share()">
         <ion-icon name="md-share"></ion-icon>
         Share
       </button>

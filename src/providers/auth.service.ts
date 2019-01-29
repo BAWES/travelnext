@@ -74,7 +74,7 @@ export class AuthService {
     loginWithGoogle(){
         if (this._platform.is('cordova')) {
             this._google.login({
-                'webClientId': '970489212684-7u4bbdcqp5k8n4psaj21jtk0aq2n48jv.apps.googleusercontent.com',
+                'webClientId': '875187117160-msudr6cpdrmqd3h2tt08ue316qgvkq7v.apps.googleusercontent.com',
                 'offline': true
             }).then(res => {
                 // console.log(res);

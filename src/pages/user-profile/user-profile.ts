@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Platform, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { CountryPage } from '../country/country';
 
@@ -29,7 +31,9 @@ export class UserProfilePage {
     public db: AngularFireDatabase,
     public auth: AuthService,
     public countrySrvc: CountryService,
-    params: NavParams
+    params: NavParams,
+    public platform: Platform,
+    private _socialSharing: SocialSharing
   ) {
     this.user = params.get("user");
   }
@@ -42,6 +46,18 @@ export class UserProfilePage {
   ionViewWillLeave(){
     this.userCountrySubscription.unsubscribe();
     this.followStatusSubscription.unsubscribe();
+  }
+
+  share(){
+    if(!this.platform.is("cordova")) return;
+    
+    let progressCompleted = Math.ceil((this.user.totalCountriesVisited / this.countrySrvc.worldCountryCount) * 100);
+    var options = {
+      message: `${this.user.displayName} has visited ${progressCompleted}% of all countries in the world. #TravelNextApp @TravelNextApp`, // not supported on some apps (Facebook, Instagram)
+      subject: 'Check out ${this.user.displayName} on TravelNext App', // fi. for email
+      url: 'http://onelink.to/f6acjt',
+    };
+    this._socialSharing.shareWithOptions(options);
   }
 
   follow(){
