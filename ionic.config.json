@@ -1,8 +1,8 @@
 {
   "name": "TravelNext",
-  "app_id": "44ad2aa1",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "id": "44ad2aa1"
 }
