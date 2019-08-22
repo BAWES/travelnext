@@ -8,7 +8,6 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import 'rxjs/add/operator/take';
 
 /*
   Handles all Auth functions

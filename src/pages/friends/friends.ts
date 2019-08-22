@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
-
+import { take } from 'rxjs/operators';
 import { UserProfilePage } from '../user-profile/user-profile';
 import { FriendSearchPage } from '../friend-search/friend-search';
 
@@ -44,8 +44,8 @@ export class FriendsPage {
       this.friendDataLoaded = true;
       this.friendData = [];
       friendlist.forEach(friend => {
-        this.db.object(`/users/${friend.payload.key}`).snapshotChanges().take(1).subscribe(userData => {
-          let user = userData.payload.val();
+        this.db.object(`/users/${friend.payload.key}`).snapshotChanges().pipe(take(1)).subscribe( (userData : any) => {
+          let user : any = userData.payload.val();
           user.$key = userData.payload.key;
           this.friendData.push(user);
         });
