@@ -25,8 +25,8 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     private _zone: NgZone,
-    private _events: Events,
-    private _auth: AuthService) 
+    private _events: Events
+  ) 
   {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
