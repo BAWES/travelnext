@@ -13,7 +13,7 @@
   <ion-list *ngIf="(friendSearchResults | async) != false">
     <button ion-item *ngFor="let user of friendSearchResults | async" (click)="loadUserPage(user)">
       <ion-avatar item-start *ngIf="user.profilePhoto">
-        <img [src]="user.profilePhoto">
+        <img [src]="user.profilePhoto" onError="this.src='assets/logo.png'">
       </ion-avatar>
       <h2>{{ user.displayName }}</h2>
     </button>
