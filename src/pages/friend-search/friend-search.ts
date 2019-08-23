@@ -32,10 +32,7 @@ export class FriendSearchPage {
       return friendData;
     }));
   }
-  updateUrl() {
-    console.log('enter mother fucker');
-    
-  }
+
   loadUserPage(user){
     this.navCtrl.push(UserProfilePage, {
       user: user
