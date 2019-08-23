@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import 'rxjs/add/operator/map';
 import { NavController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { map } from 'rxjs/operators';
 
 import { UserProfilePage } from '../user-profile/user-profile';
 
@@ -21,17 +21,21 @@ export class FriendSearchPage {
     let friendSearchQuery = this._db.list("/users", ref => {
         return ref.limitToLast(10);
     });
-    this.friendSearchResults = friendSearchQuery.snapshotChanges().map(snapshot => {
+    this.friendSearchResults = friendSearchQuery.snapshotChanges().pipe(
+    map((snapshot : any) => {
       let friendData = [];
       snapshot.forEach(friend => {
-        let user = friend.payload.val();
+        let user : any = friend.payload.val();
         user.$key = friend.key;
         friendData.push(user);
       });
       return friendData;
-    });
+    }));
   }
-
+  updateUrl() {
+    console.log('enter mother fucker');
+    
+  }
   loadUserPage(user){
     this.navCtrl.push(UserProfilePage, {
       user: user
@@ -49,18 +53,18 @@ export class FriendSearchPage {
     // Load search results based on input
     this.friendSearchResults = this._db.list("/users", ref => {
       return ref.orderByChild('displayNameLowercase').limitToFirst(10).startAt(searchStr).endAt(searchStr+"\uf8ff");
-    }).snapshotChanges().map(snapshot => {
+    }).snapshotChanges().pipe(map((snapshot : any) => {
       if(snapshot.length > 0){
         let friendData = [];
         snapshot.forEach(friend => {
-          let user = friend.payload.val();
+          let user : any = friend.payload.val();
           user.$key = friend.key;
           friendData.push(user);
         });
         return friendData;
       };
       return false;
-    });
+    }));
   }
 
 }

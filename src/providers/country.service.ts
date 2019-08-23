@@ -25,7 +25,7 @@ export class CountryService {
             this.countriesByRegion = [];
             regions.forEach(region => {
                 // Make countries iterable
-                let regionData = region.payload.val();
+                let regionData : any = region.payload.val();
                 if (regionData.countries) {
                     let countryList = [];
                     Object.keys(regionData.countries).forEach(countryKey => {
